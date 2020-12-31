@@ -37,40 +37,7 @@
 
     <!-- Header -->
     <header class="">
-      <nav class="navbar navbar-expand-lg">
-        <div class="container">
-          <a class="navbar-brand" href="index.html"><h2>Online Store <em>Website</em></h2></a>
-          <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarResponsive" aria-controls="navbarResponsive" aria-expanded="false" aria-label="Toggle navigation">
-            <span class="navbar-toggler-icon"></span>
-          </button>
-          <div class="collapse navbar-collapse" id="navbarResponsive">
-            <ul class="navbar-nav ml-auto">
-                <li class="nav-item">
-                    <a class="nav-link" href="index.html">Home
-                      <span class="sr-only">(current)</span>
-                    </a>
-                </li> 
-
-                <li class="nav-item active"><a class="nav-link" href="products.html">Products</a></li>
-
-                <li class="nav-item dropdown">
-                    <a class="nav-link dropdown-toggle" data-toggle="dropdown" href="#" role="button" aria-haspopup="true" aria-expanded="false">More</a>
-                    
-                    <div class="dropdown-menu">
-                      <a class="dropdown-item" href="about-us.html">About Us</a>
-                      <a class="dropdown-item" href="blog.html">Blog</a>
-                      <a class="dropdown-item" href="testimonials.html">Testimonials</a>
-                      <a class="dropdown-item" href="terms.html">Terms</a>
-                    </div>
-                </li>
-                
-                <li class="nav-item"><a class="nav-link" href="checkout.html">Checkout</a></li>
-
-                <li class="nav-item"><a class="nav-link" href="contact.html">Contact Us</a></li>
-            </ul>
-          </div>
-        </div>
-      </nav>
+    <?php include("navbar.php"); ?>
     </header>
 
     <!-- Page Content -->
@@ -80,7 +47,7 @@
           <div class="col-md-12">
             <div class="text-content">
               <h4>Lorem ipsum dolor sit amet</h4>
-              <h2>Products</h2>
+              <h2>Product Details</h2>
             </div>
           </div>
         </div>
@@ -90,80 +57,121 @@
     <div class="products">
       <div class="container">
         <div class="row">
-          <div class="col-md-4">
-            <div class="product-item">
-              <a href="product-details.html"><img src="assets/images/product-1-370x270.jpg" alt=""></a>
-              <div class="down-content">
-                <a href="product-details.html"><h4>Lorem ipsum dolor sit amet.</h4></a>
-                <h6><small><del>$999.00 </del></small> $779.00</h6>
-                <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Cum dicta voluptas quia dolor fuga odit.</p>
+          <div class="col-md-4 col-xs-12">
+            <div>
+              <img src="assets/images/product-1-370x270.jpg" alt="" class="img-fluid wc-image">
+            </div>
+            <br>
+            <div class="row">
+              <div class="col-sm-4 col-xs-6">
+                <div>
+                  <img src="assets/images/product-1-370x270.jpg" alt="" class="img-fluid">
+                </div>
+                <br>
+              </div>
+              <div class="col-sm-4 col-xs-6">
+                <div>
+                  <img src="assets/images/product-2-370x270.jpg" alt="" class="img-fluid">
+                </div>
+                <br>
+              </div>
+              <div class="col-sm-4 col-xs-6">
+                <div>
+                  <img src="assets/images/product-3-370x270.jpg" alt="" class="img-fluid">
+                </div>
+                <br>
               </div>
             </div>
           </div>
 
-          <div class="col-md-4">
-            <div class="product-item">
-              <a href="product-details.html"><img src="assets/images/product-2-370x270.jpg" alt=""></a>
-              <div class="down-content">
-                <a href="product-details.html"><h4>Lorem ipsum dolor sit amet.</h4></a>
-                <h6><small><del>$99.00</del></small>  $79.00</h6>
-                <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Non beatae soluta, placeat vitae cum maxime culpa itaque minima.</p>
-              </div>
-            </div>
-          </div>
+          <div class="col-md-8 col-xs-12">
+            <form action="#" method="post" class="form">
+              <h2>Lorem ipsum dolor sit amet.</h2>
 
-          <div class="col-md-4">
-            <div class="product-item">
-              <a href="product-details.html"><img src="assets/images/product-3-370x270.jpg" alt=""></a>
-              <div class="down-content">
-                <a href="product-details.html"><h4>Lorem ipsum dolor sit amet.</h4></a>
-                <h6><small><del>$1999.00</del></small>   $1779.00</h6>
-                <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Nesciunt nisi quia aspernatur, harum facere delectus saepe enim?</p>
-              </div>
-            </div>
-          </div>
+              <br>
 
-          <div class="col-md-4">
-            <div class="product-item">
-              <a href="product-details.html"><img src="assets/images/product-4-370x270.jpg" alt=""></a>
-              <div class="down-content">
-                <a href="product-details.html"><h4>Lorem ipsum dolor sit amet.</h4></a>
-                <h6><small><del>$999.00 </del></small> $779.00</h6>
-                <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Cum dicta voluptas quia dolor fuga odit.</p>
-              </div>
-            </div>
-          </div>
+              <p class="lead">
+                <small><del> $999.00</del></small><strong class="text-primary">$779.00</strong>
+              </p>
 
-          <div class="col-md-4">
-            <div class="product-item">
-              <a href="product-details.html"><img src="assets/images/product-5-370x270.jpg" alt=""></a>
-              <div class="down-content">
-                <a href="product-details.html"><h4>Lorem ipsum dolor sit amet.</h4></a>
-                <h6><small><del>$99.00</del></small>  $79.00</h6>
-                <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Non beatae soluta, placeat vitae cum maxime culpa itaque minima.</p>
-              </div>
-            </div>
-          </div>
+              <br>
 
-          <div class="col-md-4">
-            <div class="product-item">
-              <a href="product-details.html"><img src="assets/images/product-6-370x270.jpg" alt=""></a>
-              <div class="down-content">
-                <a href="product-details.html"><h4>Lorem ipsum dolor sit amet.</h4></a>
-                <h6><small><del>$1999.00</del></small>   $1779.00</h6>
-                <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Nesciunt nisi quia aspernatur, harum facere delectus saepe enim?</p>
-              </div>
-            </div>
-          </div>
+              <p class="lead">
+                Lorem ipsum dolor sit amet, consectetur adipisicing elit. Excepturi ratione molestias maxime odio. Provident ratione vero, corrupti, optio laborum aut!
+              </p>
 
+              <br> 
+
+              <div class="row">
+                <div class="col-sm-4">
+                  <label class="control-label">Extra 1</label>
+                  <div class="form-group">
+                    <select class="form-control">
+                      <option value="0">18 gears</option>
+                      <option value="1">21 gears</option>
+                      <option value="2">27 gears</option>
+                    </select>
+                  </div>
+                </div>
+                <div class="col-sm-8">
+                  <label class="control-label">Quantity</label>
+
+                  <div class="row">
+                    <div class="col-sm-6">
+                      <div class="form-group">
+                        <input type="text" class="form-control" placeholder="1">
+                      </div>
+                    </div>
+
+                    <div class="col-sm-6">
+                      <a href="#" class="btn btn-primary btn-block">Add to Cart</a>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </form>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="latest-products">
+      <div class="container">
+        <div class="row">
           <div class="col-md-12">
-            <ul class="pages">
-              <li><a href="#">1</a></li>
-              <li class="active"><a href="#">2</a></li>
-              <li><a href="#">3</a></li>
-              <li><a href="#">4</a></li>
-              <li><a href="#"><i class="fa fa-angle-double-right"></i></a></li>
-            </ul>
+            <div class="section-heading">
+              <h2>Similar Products</h2>
+              <a href="products.php">view more <i class="fa fa-angle-right"></i></a>
+            </div>
+          </div>
+          <div class="col-md-4">
+            <div class="product-item">
+              <a href="product-details.php"><img src="assets/images/product-1-370x270.jpg" alt=""></a>
+              <div class="down-content">
+                <a href="product-details.php"><h4>Omega bicycle</h4></a>
+                <h6><small><del>$999.00 </del></small> $779.00</h6>
+              </div>
+            </div>
+          </div>
+
+          <div class="col-md-4">
+            <div class="product-item">
+              <a href="product-details.php"><img src="assets/images/product-2-370x270.jpg" alt=""></a>
+              <div class="down-content">
+                <a href="product-details.php"><h4>Nike Revolution 5 Shoes</h4></a>
+                <h6><small><del>$99.00</del></small>  $79.00</h6>
+              </div>
+            </div>
+          </div>
+
+          <div class="col-md-4">
+            <div class="product-item">
+              <a href="product-details.php"><img src="assets/images/product-3-370x270.jpg" alt=""></a>
+              <div class="down-content">
+                <a href="product-details.php"><h4>Treadmill Orion Sprint</h4></a>
+                <h6><small><del>$1999.00</del></small>   $1779.00</h6>
+              </div>
+            </div>
           </div>
         </div>
       </div>

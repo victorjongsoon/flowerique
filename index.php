@@ -36,40 +36,7 @@
 
     <!-- Header -->
     <header class="">
-      <nav class="navbar navbar-expand-lg">
-        <div class="container">
-          <a class="navbar-brand" href="index.html"><h2>Flowerique <em>Store</em></h2></a>
-          <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarResponsive" aria-controls="navbarResponsive" aria-expanded="false" aria-label="Toggle navigation">
-            <span class="navbar-toggler-icon"></span>
-          </button>
-          <div class="collapse navbar-collapse" id="navbarResponsive">
-            <ul class="navbar-nav ml-auto">
-                <li class="nav-item active">
-                    <a class="nav-link" href="index.html">Home
-                      <span class="sr-only">(current)</span>
-                    </a>
-                </li> 
-
-                <li class="nav-item"><a class="nav-link" href="products.html">Products</a></li>
-
-                <li class="nav-item dropdown">
-                    <a class="nav-link dropdown-toggle" data-toggle="dropdown" href="#" role="button" aria-haspopup="true" aria-expanded="false">More</a>
-                    
-                    <div class="dropdown-menu">
-                      <a class="dropdown-item" href="about-us.html">About Us</a>
-                      <a class="dropdown-item" href="blog.html">Blog</a>
-                      <a class="dropdown-item" href="testimonials.html">Testimonials</a>
-                      <a class="dropdown-item" href="terms.html">Terms</a>
-                    </div>
-                </li>
-                
-                <li class="nav-item"><a class="nav-link" href="checkout.html">Checkout</a></li>
-
-                <li class="nav-item"><a class="nav-link" href="contact.html">Contact Us</a></li>
-            </ul>
-          </div>
-        </div>
-      </nav>
+    <?php include("navbar.php"); ?>
     </header>
 
     <!-- Page Content -->
@@ -104,14 +71,14 @@
           <div class="col-md-12">
             <div class="section-heading">
               <h2>Featured Products</h2>
-              <a href="products.html">view more <i class="fa fa-angle-right"></i></a>
+              <a href="products.php">view more <i class="fa fa-angle-right"></i></a>
             </div>
           </div>
           <div class="col-md-4">
             <div class="product-item">
-              <a href="product-details.html"><img src="assets/images/product-1-370x270.jpg" alt=""></a>
+              <a href="product-details.php"><img src="assets/images/product-1-370x270.jpg" alt=""></a>
               <div class="down-content">
-                <a href="product-details.html"><h4>Lorem ipsum dolor sit amet.</h4></a>
+                <a href="product-details.php"><h4>Lorem ipsum dolor sit amet.</h4></a>
                 <h6><small><del>$999.00 </del></small> $779.00</h6>
                 <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Cum dicta voluptas quia dolor fuga odit.</p>
               </div>
@@ -120,9 +87,9 @@
 
           <div class="col-md-4">
             <div class="product-item">
-              <a href="product-details.html"><img src="assets/images/product-2-370x270.jpg" alt=""></a>
+              <a href="product-details.php"><img src="assets/images/product-2-370x270.jpg" alt=""></a>
               <div class="down-content">
-                <a href="product-details.html"><h4>Lorem ipsum dolor sit amet.</h4></a>
+                <a href="product-details.php"><h4>Lorem ipsum dolor sit amet.</h4></a>
                 <h6><small><del>$99.00</del></small>  $79.00</h6>
                 <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Non beatae soluta, placeat vitae cum maxime culpa itaque minima.</p>
               </div>
@@ -131,9 +98,9 @@
 
           <div class="col-md-4">
             <div class="product-item">
-              <a href="product-details.html"><img src="assets/images/product-3-370x270.jpg" alt=""></a>
+              <a href="product-details.php"><img src="assets/images/product-3-370x270.jpg" alt=""></a>
               <div class="down-content">
-                <a href="product-details.html"><h4>Lorem ipsum dolor sit amet.</h4></a>
+                <a href="product-details.php"><h4>Lorem ipsum dolor sit amet.</h4></a>
                 <h6><small><del>$1999.00</del></small>   $1779.00</h6>
                 <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Nesciunt nisi quia aspernatur, harum facere delectus saepe enim?</p>
               </div>
@@ -142,9 +109,9 @@
 
           <div class="col-md-4">
             <div class="product-item">
-              <a href="product-details.html"><img src="assets/images/product-4-370x270.jpg" alt=""></a>
+              <a href="product-details.php"><img src="assets/images/product-4-370x270.jpg" alt=""></a>
               <div class="down-content">
-                <a href="product-details.html"><h4>Lorem ipsum dolor sit amet.</h4></a>
+                <a href="product-details.php"><h4>Lorem ipsum dolor sit amet.</h4></a>
                 <h6><small><del>$999.00 </del></small> $779.00</h6>
                 <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Cum dicta voluptas quia dolor fuga odit.</p>
               </div>
@@ -153,9 +120,9 @@
 
           <div class="col-md-4">
             <div class="product-item">
-              <a href="product-details.html"><img src="assets/images/product-5-370x270.jpg" alt=""></a>
+              <a href="product-details.php"><img src="assets/images/product-5-370x270.jpg" alt=""></a>
               <div class="down-content">
-                <a href="product-details.html"><h4>Lorem ipsum dolor sit amet.</h4></a>
+                <a href="product-details.php"><h4>Lorem ipsum dolor sit amet.</h4></a>
                 <h6><small><del>$999.00 </del></small> $779.00</h6>
                 <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Cum dicta voluptas quia dolor fuga odit.</p>
               </div>
@@ -164,9 +131,9 @@
 
           <div class="col-md-4">
             <div class="product-item">
-              <a href="product-details.html"><img src="assets/images/product-6-370x270.jpg" alt=""></a>
+              <a href="product-details.php"><img src="assets/images/product-6-370x270.jpg" alt=""></a>
               <div class="down-content">
-                <a href="product-details.html"><h4>Lorem ipsum dolor sit amet.</h4></a>
+                <a href="product-details.php"><h4>Lorem ipsum dolor sit amet.</h4></a>
                 <h6><small><del>$999.00 </del></small> $779.00</h6>
                 <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Cum dicta voluptas quia dolor fuga odit.</p>
               </div>
@@ -193,7 +160,7 @@
                 <li><a href="#">It aquecorporis nulla aspernatur</a></li>
                 <li><a href="#">Corporis, omnis doloremque</a></li>
               </ul>
-              <a href="about-us.html" class="filled-button">Read More</a>
+              <a href="about-us.php" class="filled-button">Read More</a>
             </div>
           </div>
           <div class="col-md-6">
@@ -212,7 +179,7 @@
             <div class="section-heading">
               <h2>Latest blog posts</h2>
 
-              <a href="blog.html">read more <i class="fa fa-angle-right"></i></a>
+              <a href="blog.php">read more <i class="fa fa-angle-right"></i></a>
             </div>
           </div>
 
@@ -260,7 +227,7 @@
             <div class="section-heading">
               <h2>Happy Clients</h2>
 
-              <a href="testimonials.html">read more <i class="fa fa-angle-right"></i></a>
+              <a href="testimonials.php">read more <i class="fa fa-angle-right"></i></a>
             </div>
           </div>
           <div class="col-md-12">
@@ -342,7 +309,7 @@
                   <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Itaque corporis amet elite author nulla.</p>
                 </div>
                 <div class="col-lg-4 col-md-6 text-right">
-                  <a href="contact.html" class="filled-button">Contact Us</a>
+                  <a href="contact.php" class="filled-button">Contact Us</a>
                 </div>
               </div>
             </div>
