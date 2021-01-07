@@ -28,7 +28,7 @@ $MainContent .= "</div>";
 // 4th row - Login button
 $MainContent .= "<div class='form-group row'>";
 $MainContent .= "<div class='col-sm-9 offset-sm-3'>";
-$MainContent .= "<button type='submit'>Login</button>";
+$MainContent .= "<button type='submit' class='button'>Login</button>";
 $MainContent .= "<p>Please sign up if you do not have an account.</p>";
 $MainContent .= "</div>";
 $MainContent .= "</div>";

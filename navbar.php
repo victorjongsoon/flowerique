@@ -5,7 +5,8 @@ $content1 = "Welcome Guest<br />";
 $content2 = "<li class='nav-item'>
 		     <a class='nav-link' href='register.php' style='color:#000000'>Sign Up</a></li>
 			 <li class='nav-item'>
-		     <a class='nav-link' href='login.php' style='color:#000000'>Login</a></li>";
+             <a class='nav-link' href='login.php' style='color:#000000'>Login</a></li>
+             ";
 
 // If $_SESSION["ShopperName"] is not null
 if(isset($_SESSION["ShopperName"])) { 
@@ -13,7 +14,15 @@ if(isset($_SESSION["ShopperName"])) {
     //Display a greeting message, Change Password and logout links 
     //after shopper has logged in.
     $content1 = "Welcome <b>$_SESSION[ShopperName]</b>";
-    $content2 = "<li class='nav-item'>
+    $content2 = "  <li class='nav-item'>
+        <div class='search-container' >
+            <form action='/action_page.php'>
+            <input type='text' placeholder='Search for products...' name='search'>
+            <button type='submit' style='background-color: #FFB6C1;'>Search</button>
+            </form>
+        </div>
+    </li>
+    <li class='nav-item'>
     <a class='nav-link' href='changePassword.php' style='color:#000000'>Change Password</a></li>
     <li class='nav-item'>
     <a class='nav-link' href='logout.php' style='color:#000000'>Logout</a></li>";
@@ -54,6 +63,7 @@ if(isset($_SESSION["ShopperName"])) {
             <li class="nav-item">
                 <a class="nav-link" href="shoppingCart.php" style="color:#000000">Shopping Cart</a>
             </li>
+      
         </ul>
         <!-- Right-justified menu items -->
         <ul class="navbar-nav ml-auto">
