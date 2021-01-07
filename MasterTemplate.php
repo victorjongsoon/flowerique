@@ -1,70 +1,55 @@
 <!DOCTYPE html>
-<html lang="en">
 
-  <head>
-
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-    <meta name="description" content="">
-    <meta name="author" content="">
-    <link rel="icon" href="assets/images/favicon.ico">
-    <link href="https://fonts.googleapis.com/css?family=Poppins:100,200,300,400,500,600,700,800,900&display=swap" rel="stylesheet">
-
-    <title>Flowerique | For your love ones</title>
-
-    <!-- Bootstrap core CSS -->
-    <link href="vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
-
-    <!-- Additional CSS Files -->
-    <link rel="stylesheet" href="assets/css/fontawesome.css">
-    <link rel="stylesheet" href="assets/css/style.css">
-    <link rel="stylesheet" href="assets/css/owl.css">
-
-  </head>
-
-  <body>
-
-    <!-- ***** Preloader Start ***** -->
-    <div id="preloader">
-        <div class="jumper">
-            <div></div>
-            <div></div>
-            <div></div>
-        </div>
-    </div>  
-    <!-- ***** Preloader End ***** -->
-
-    <!-- Header -->
-    <header class="">
-    <?php include("navbar.php"); ?>
-    </header>
-
-    <!-- Page Content -->
-    <div class="row" class="col-sm-12" style="padding:15px">
-        <?php echo $MainContent; ?>
-    </div>
-
-    
-    <footer>
-      <div class="container">
-        <div class="row">
-          <div class="col-md-12">
-            <div class="inner-content">
-              <p>Copyright © 2020 Company Name - Template by: <a href="https://www.phpjabbers.com/">PHPJabbers.com</a></p>
+<html>
+    <head>
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <title>Mamaya e-BookStore</title>
+        <!-- Latest compiled and minified CSS -->
+        <link rel="stylesheet" href="css/bootstrap.min.css">
+        <!-- JQuery Library -->
+        <script src= js/jquery-3.3.1.min.js></script>
+        <!-- Latest compiled JavaScript -->
+        <script src= js/bootstrap.min.js></script>
+        <!-- Site specific Cascading Stylesheet -->
+        <!-- Included after bootstrap CSS to avoid being overwritten -->
+        <link rel="stylesheet" href="css/style.css">
+    </head>
+    <body>
+        <div class="container">
+            <!-- 1st Row -->
+            <div class="row">
+                <div class="col-sm-12">
+                    <a href="index.php">
+                        <img src="Images/flowerique.jpg" alt="Logo" class="img-fluid"/>
+                    </a>
+                </div>
+                
             </div>
-          </div>
+            <!-- 2nd Row -->
+            <div class="row">
+                <div class="col-sm-12">
+                    <?php include("navbar.php"); ?>
+                </div>
+            </div>
+            
+            <!-- 3rd Row -->
+            <div class="row" class="col-sm-12" style="padding:15px">
+                <?php echo $MainContent; ?>
+            </div>
+            <!-- 4th Row -->
+            <div class="row">
+                <div class="col-sm-12" style="text-align: right;">   
+                    <hr/>
+                    Do you need help? Please email to:
+                    <a href="mailto:mamaya@np.edu.sg">flowerique@np.edu.sg</a>
+                    <p style="font-size:12px">&copy;Copyright by Flowerique Group</p>
+
+                </div>
+            </div>
         </div>
-      </div>
-    </footer>
 
-
-    <!-- Bootstrap core JavaScript -->
-    <script src="vendor/jquery/jquery.min.js"></script>
-    <script src="vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
-
-
-    <!-- Additional Scripts -->
-    <script src="assets/js/custom.js"></script>
-    <script src="assets/js/owl.js"></script>
-  </body>
+        
+        
+    </body>
 </html>

@@ -1,13 +1,11 @@
-
-
 <?php 
 //Display guest welcome message, Login and Registration links
 //when shopper has yet to login,
 $content1 = "Welcome Guest<br />";
 $content2 = "<li class='nav-item'>
-		     <a class='nav-link' href='register.php'>Sign Up</a></li>
+		     <a class='nav-link' href='register.php' style='color:#000000'>Sign Up</a></li>
 			 <li class='nav-item'>
-		     <a class='nav-link' href='login.php'>Login</a></li>";
+		     <a class='nav-link' href='login.php' style='color:#000000'>Login</a></li>";
 
 // If $_SESSION["ShopperName"] is not null
 if(isset($_SESSION["ShopperName"])) { 
@@ -16,9 +14,9 @@ if(isset($_SESSION["ShopperName"])) {
     //after shopper has logged in.
     $content1 = "Welcome <b>$_SESSION[ShopperName]</b>";
     $content2 = "<li class='nav-item'>
-    <a class='nav-link' href='changePassword.php'>Change Password</a></li>
+    <a class='nav-link' href='changePassword.php' style='color:#000000'>Change Password</a></li>
     <li class='nav-item'>
-    <a class='nav-link' href='logout.php'>Logout</a></li>";
+    <a class='nav-link' href='logout.php' style='color:#000000'>Logout</a></li>";
     
 	//To Do 2 (Practical 4) - 
     //Display number of item in cart
@@ -27,43 +25,40 @@ if(isset($_SESSION["ShopperName"])) {
     }
 }
 ?>
-   
-<header class="">
-    <nav class="navbar navbar-expand-lg">
-    <div class="container">
-        <a class="navbar-brand" href="index.php"><h2>Flowerique <em>Store</em></h2></a>
-        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarResponsive" aria-controls="navbarResponsive" aria-expanded="false" aria-label="Toggle navigation">
+<!-- To Do 3 (Practical 1) - 
+     Display a navbar which is visible before or after collapsing -->
+<nav class="navbar navbar-expand-md navbar-dark" style="background-color: #FFB6C1";>
+    <!-- Dynamic Text Display -->
+    <span class="navbar-text ml-md-2" style="color:#000000; max-width:80%;">
+        <?php echo $content1; ?>
+    </span>
+    <!-- Toggler/Collapsible Button -->
+    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#collapsibleNavbar">
         <span class="navbar-toggler-icon"></span>
-        </button>
-        <div class="collapse navbar-collapse" id="navbarResponsive">
-        <ul class="navbar-nav ml-auto">
+    </button>
+</nav>
+
+<!-- To Do 4 (Practical 1) - 
+     Define a collapsible navbar -->
+<nav class="navbar navbar-expand-md navbar-dark" style="background-color: #FFB6C1";>
+    <!-- Collapsible part of navbar -->
+    <div class="collapse navbar-collapse" id="collapsibleNavbar">
+        <!-- Left-justified menu items -->
+        <ul class="navbar-nav mr-auto">
             <li class="nav-item">
-                <a class="nav-link" href="index.php">Home
-                    <span class="sr-only">(current)</span>
-                </a>
-            </li> 
-
-            <li class="nav-item"><a class="nav-link" href="products.php">Products</a></li>
-
-            <li class="nav-item dropdown">
-                <a class="nav-link dropdown-toggle" data-toggle="dropdown" href="#" role="button" aria-haspopup="true" aria-expanded="false">More</a>
-                
-                <div class="dropdown-menu">
-                    <a class="dropdown-item" href="about-us.php">About Us</a>
-                    <a class="dropdown-item" href="blog.php">Blog</a>
-                    <a class="dropdown-item" href="testimonials.php">Testimonials</a>
-                    <a class="dropdown-item" href="terms.php">Terms</a>
-                </div>
+                <a class="nav-link" href="category.php" style="color:#000000">Product Categories</a>
             </li>
-            
-            <li class="nav-item"><a class="nav-link" href="checkout.php">Checkout</a></li>
-
-            <li class="nav-item"><a class="nav-link" href="contact.php">Contact Us</a></li>
             <li class="nav-item">
-                <?php echo $content2; ?>
+                <a class="nav-link" href="search.php" style="color:#000000">Product Search</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" href="shoppingCart.php" style="color:#000000">Shopping Cart</a>
             </li>
         </ul>
-        </div>
+        <!-- Right-justified menu items -->
+        <ul class="navbar-nav ml-auto">
+            <?php echo $content2; ?>
+        </ul>
     </div>
-    </nav>
-</header>
+        
+</nav>
