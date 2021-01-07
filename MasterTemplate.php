@@ -42,7 +42,7 @@
                 <div class="col-sm-12" style="text-align: right;">   
                     <hr/>
                     Do you need help? Please email to:
-                    <a href="mailto:mamaya@np.edu.sg">flowerique@np.edu.sg</a>
+                    <a href="flowerique@np.edu.sg">flowerique@np.edu.sg</a>
                     <p style="font-size:12px">&copy;Copyright by Flowerique Group</p>
 
                 </div>
