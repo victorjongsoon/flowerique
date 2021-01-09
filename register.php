@@ -11,7 +11,7 @@ function validateForm()
     var strongRegex = new RegExp("^(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])(?=.*[!@#\$%\^&\*])(?=.{8,})");
     
     if(strongRegex.test(document.register.password.value)) {
-        return true;
+        
     }
     else{
         alert("Your password must be 8 characters long containing at least 1 lowercase alphabetical character, 1 uppercase alphabetical character, 1 numeric character, and one special character");
