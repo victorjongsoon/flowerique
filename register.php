@@ -1,23 +1,35 @@
 <script type="text/javascript">
 function validateForm()
 {
-    // To Do 1 - Check if password matched
+    // Check if password matched
 	if (document.register.password.value != document.register.password2.value){
         alert("Passwords not matched!");
         return false; // cancel submission
     }
-	// To Do 2 - Check if telephone number entered correctly
-	//           Singapore telephone number consists of 8 digits,
-	//           start with 6, 8 or 9
+
+    // Password Strength
+    var strongRegex = new RegExp("^(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])(?=.*[!@#\$%\^&\*])(?=.{8,})");
+    
+    if(strongRegex.test(document.register.password.value)) {
+        return true;
+    }
+    else{
+        alert("Your password must be 8 characters long containing at least 1 lowercase alphabetical character, 1 uppercase alphabetical character, 1 numeric character, and one special character");
+        return false; // cancel submission
+    }
+
+	// Check if telephone number entered correctly
+	// Singapore telephone number consists of 8 digits,
+	// start with 6, 8 or 9
     if (document.register.phone.value != ""){
         var str = document.register.phone.value;
-        if str.length != 8 {
-            alert("Please enter a 8-digit phone number.")
+        if (str.length != 8) {
+            alert("Please enter a 8-digit phone number.");
             return false; // cancel submission
         }
-        else if (str.substr(0,1) != "6") && str.substr(0,1) != "8" && str.substr(0,1) != "9" {
+        else if (str.substr(0,1) != "6" && str.substr(0,1) != "8" && str.substr(0,1) != "9") {
                      alert("Phone number in Singapore should start with 6, 8 or 9.");
-                     return false // cancel submission
+                     return false; // cancel submission
                  }
     }
     return true;  // No error found
@@ -80,6 +92,7 @@ $MainContent .= "<input class='form-control' name='email' id='email'
                   type='email' required /> (required)";
 $MainContent .= "</div>";
 $MainContent .= "</div>";
+
 $MainContent .= "<div class='form-group row'>";
 $MainContent .= "<label class='col-sm-3 col-form-label' for='password'>
                  Password:</label>";
@@ -122,7 +135,7 @@ $MainContent .= "</div>";
 
 $MainContent .= "<div class='form-group row'>";       
 $MainContent .= "<div class='col-sm-9 offset-sm-3'>";
-$MainContent .= "<button type='submit' class='button' id='test'>Register</button>";
+$MainContent .= "<button type='submit' class='button'>Register</button>";
 $MainContent .= "</div>";
 $MainContent .= "</div>";
 $MainContent .= "</form>";
