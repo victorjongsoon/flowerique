@@ -27,6 +27,9 @@ function validateForm()
 <?php
 // Detect the current session
 session_start();
+
+$today = date("Y-m-d");  
+$today = date('Y-m-d', strtotime("+1 day"));
 $MainContent = "<div style='width:80%; margin:auto;'>";
 $MainContent .= "<form name='register' action='registration.php' method='post' 
                        onsubmit='return validateForm()'>";
@@ -46,7 +49,7 @@ $MainContent .= "</div>";
 $MainContent .= "<div class='form-group row'>";
 $MainContent .= "<label class='col-sm-3 col-form-label' for='birthday'>Birthday:</label>";
 $MainContent .= "<div class='col-sm-9'>";
-$MainContent .= "<input type='date' id='birthday' name='birthday'>";
+$MainContent .= "<input type='date' id='birthday' name='birthday' max=$today>";
 $MainContent .= "</div>";
 $MainContent .= "</div>";
 
@@ -127,20 +130,4 @@ $MainContent .= "</div>";
 include("MasterTemplate.php"); 
 ?>
 
-
-<script type="text/javascript">
-
-    var dateString = document.getElementById('birthday').value;
-    var myDate = new Date(dateString);
-    var today = new Date();
-        if ( myDate > today ) { 
-            document.getElementById("test").addEventListener("click", function(event){
-                event.preventDefault()
-            });
-            alert("Your birthday must be Bigger or Equal to today date");
-            return false;
-        }
-       
-
-</script>
 
