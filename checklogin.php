@@ -75,23 +75,5 @@ if ($checkLogin == TRUE){
 	exit;
 }
 
-
-/* 
-if (($email == "ecader@np.edu.sg") && ($pwd == "password")) {
-	// Save user's info in session variables
-	$_SESSION["ShopperName"] = "Ecader";
-	$_SESSION["ShopperID"] = 1;
-	
-	// To Do 2 (Practical 4): Get active shopping cart
-	
-	// Redirect to home page
-	header("Location: index.php");
-	exit;
-}
-else {
-	$MainContent = "<h3 style='color:red'>Invalid Login Credentials</h3>";
-}
-*/
-
 include("MasterTemplate.php");
 ?>

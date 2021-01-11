@@ -3,6 +3,15 @@
 session_start();
 include_once("mysql_conn.php");
 
+// Check if user logged in 
+if (! isset($_SESSION["ShopperID"])) {
+	// redirect to login page if the session variable shopperid is not set
+    $link = "login.php";
+}
+else{
+    $link = "addFeedback.php";
+}
+
 $MainContent = "";
 $MainContent .= "<link rel='stylesheet' href='css/site.css'>";
 $MainContent .= "<div class='latest-products'>";
@@ -11,7 +20,7 @@ $MainContent .= "<div class='row'>";
 $MainContent .= "<div class='col-md-12'>";
 $MainContent .= "<div class='section-heading'>";
 $MainContent .= "<h2>Feedback</h2>";
-$MainContent .= "<a href='products.php'>Add Review<i class='fa fa-angle-right'></i></a>";
+$MainContent .= "<a href='$link'>Add Feedback<i class='fa fa-angle-right'></i></a>";
 $MainContent .= "<hr/>";
 $MainContent .= "</div>";
 $MainContent .= "</div>";
@@ -43,11 +52,6 @@ if ($result->num_rows > 0) {
         $MainContent .= "</div>";
         $MainContent .= "</div>";
 
-        /*
-        $MainContent .= "<p>" . $row["Subject"]. " by " . $row["Name"] . " :<br> " . $row["Content"] . "</p>";
-        $MainContent .= "<p>" . $row["Rank"] . " out of 5 stars" . "</p>";
-        */
-
     }
 } else {
     echo "0 results";
@@ -56,6 +60,7 @@ if ($result->num_rows > 0) {
 $MainContent .= "</div>";
 $MainContent .= "</div>";
 $MainContent .= "</div>";
+
 
 include("MasterTemplate.php");
 ?>
