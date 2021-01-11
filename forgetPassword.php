@@ -1,6 +1,7 @@
 <?php 
+session_start();
 $MainContent = "<div style='width:80%; margin:auto;'>";
-$MainContent .= "<form action='securityQuestion.php' method='post'>"; 
+$MainContent .= "<form method='post' action='forgetPassword.php'>"; 
 $MainContent .= "<div class='form-group row'>";
 $MainContent .= "<div class='col-sm-9 offset-sm-3'>";
 $MainContent .= "<span class='page-title'>Forget Password</span>";
@@ -16,13 +17,14 @@ $MainContent .= "</div>";
 $MainContent .= "</div>";
 $MainContent .= "<div class='form-group row'>";       
 $MainContent .= "<div class='col-sm-9 offset-sm-3'>";
-$MainContent .= "<button type='submit'>Submit</button>";
+$MainContent .= "<button name='submit' type='submit'>Submit</button>";
 $MainContent .= "</div>";
 $MainContent .= "</div>";
 $MainContent .= "</form>";
 
 // Process after user click the submit button
 if (isset($_POST['eMail'])) {
+	$_SESSION["eMail"] = $_POST['eMail'];
 	// Read email address entered by user
 	$eMail = $_POST['eMail'];
 	// Retrieve shopper record based on e-mail address
@@ -33,15 +35,16 @@ if (isset($_POST['eMail'])) {
 	$stmt->execute();
 	$result = $stmt->get_result();
 	$stmt->close();
-	# if ($conn->num_rows($result) > 0) {
+	
 	if ($result->num_rows > 0) {
 		header("Location: securityQuestion.php");
 	}
 	else {
-		$MainContent .= "<p><span style='color:red;'>Wrong E-mail address!</span><p>";
+		header("Location: wrongEmailAddress.php");
 	}
 	$conn->close();
 }
+
 
 $MainContent .= "</div>";
 include("MasterTemplate.php");

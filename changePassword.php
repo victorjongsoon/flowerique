@@ -6,6 +6,17 @@ function validateForm()
  	    alert("Passwords not matched!");
         return false;   // cancel submission
     }
+
+    // Password Strength
+    var strongRegex = new RegExp("^(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])(?=.*[!@#\$%\^&\*])(?=.{8,})");
+    
+    if(strongRegex.test(document.changePwd.pwd1.value)) {
+
+    }
+    else{
+        alert("Your password must be 8 characters long containing at least 1 lowercase alphabetical character, 1 uppercase alphabetical character, 1 numeric character, and one special character");
+        return false; // cancel submission
+    }
     return true;  // No error found
 }
 </script>
@@ -13,9 +24,11 @@ function validateForm()
 <?php
 // Detect the current session
 session_start();
-// To Do 1: Check if user logged in 
-
-// End of To Do 1
+// Check if user logged in 
+if (! isset($_SESSION["ShopperID"])) {
+	// redirect to login page if the session variable shopperid is not set
+    header("Location: login.php");
+}
 
 $MainContent = "<div style='width:80%; margin:auto;'>";
 $MainContent .= "<form name='changePwd' method='post' 

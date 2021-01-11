@@ -1,7 +1,7 @@
 <?php 
 session_start();
 // Read the data input from previous page
-$eMail = $_POST['eMail'];
+$eMail = $_SESSION["eMail"];
 
 // Retrieve shopper record based on e-mail address
 include_once("mysql_conn.php");
