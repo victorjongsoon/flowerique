@@ -165,7 +165,7 @@ if(isset($_POST['submit'])){
         // Execute statement (SQL is more secure as it prevent risk of SQL Injection)
         if ($stmt->execute()){ // SQL statement executed successfully
             // Refresh page
-            header("Location: index.php");
+            header("Location: updateProfileSuccessful.php");
             // Save the Shopper Name in a session variable
             $_SESSION["ShopperName"] = $_POST['name'];
         }

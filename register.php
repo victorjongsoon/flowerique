@@ -49,6 +49,7 @@ $MainContent .= "<div class='col-sm-9 offset-sm-3'>";
 $MainContent .= "<span class='page-title'>Membership Registration</span>";
 $MainContent .= "</div>";
 $MainContent .= "</div>";
+
 $MainContent .= "<div class='form-group row'>";
 $MainContent .= "<label class='col-sm-3 col-form-label' for='name'>Name:</label>";
 $MainContent .= "<div class='col-sm-9'>";
