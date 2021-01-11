@@ -41,7 +41,6 @@ function validateForm()
 session_start();
 
 $today = date("Y-m-d");  
-$today = date('Y-m-d', strtotime("+1 day"));
 $MainContent = "<div style='width:80%; margin:auto;'>";
 $MainContent .= "<form name='register' action='registration.php' method='post' 
                        onsubmit='return validateForm()'>";
@@ -61,7 +60,7 @@ $MainContent .= "</div>";
 $MainContent .= "<div class='form-group row'>";
 $MainContent .= "<label class='col-sm-3 col-form-label' for='birthday'>Birthday:</label>";
 $MainContent .= "<div class='col-sm-9'>";
-$MainContent .= "<input type='date' id='birthday' name='birthday' max=$today>";
+$MainContent .= "<input type='date' id='birthday' name='birthday' max='$today'>";
 $MainContent .= "</div>";
 $MainContent .= "</div>";
 

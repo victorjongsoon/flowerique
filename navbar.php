@@ -23,7 +23,7 @@ if(isset($_SESSION["ShopperName"])) {
         </div>
     </li>
     <li class='nav-item'>
-    <a class='nav-link' href='changePassword.php' style='color:#000000'>Change Password</a></li>
+    <a class='nav-link' href='updateProfile.php' style='color:#000000'>Update Profile</a></li>
     <li class='nav-item'>
     <a class='nav-link' href='logout.php' style='color:#000000'>Logout</a></li>";
     
