@@ -19,6 +19,7 @@ function validateForm()
 }
 </script>
 
+
 <?php
 // Detect the current session
 session_start();
@@ -55,6 +56,7 @@ $MainContent .= "<div class='form-group row'>";
 
 $MainContent .= "<div class='col-sm-9 offset-sm-3'>";
 $MainContent .= "<span class='page-title'>Update Profile</span>";
+$MainContent .= "<a href='changePassword.php' style='float:right;'>Change Password</a>";
 $MainContent .= "</div>";
 $MainContent .= "</div>";
 
@@ -114,7 +116,7 @@ $MainContent .= "<label class='col-sm-3 col-form-label' for='email'>
                  Email:</label>";
 $MainContent .= "<div class='col-sm-9'>";
 $MainContent .= "<input class='form-control' name='email' id='email' value='$email' 
-                        type='email' disabled />";
+                        type='email' required />";
 $MainContent .= "</div>";
 $MainContent .= "</div>";
 
@@ -150,29 +152,67 @@ $MainContent .= "</div>";
 $MainContent .= "</div>";
 
 $MainContent .= "</form>";
+
 // Process after user click the submit button
 if(isset($_POST['submit'])){ 
-    //Define the INSERT SQL Statement
-    $qry = "UPDATE Shopper (Name, Address, Country, Phone, BirthDate, PwdQuestion, PwdAnswer) VALUES (?, ?, ?, ?, ?, ?, ?)";
-    // Prepare statement for execution
-    $stmt = $conn->prepare($qry);
+    if ($_POST['email'] == $email){
+        //Define the INSERT SQL Statement
+        $qry = "UPDATE Shopper SET Name=?, Address=?, Country=?, Phone=?, BirthDate=?, PwdQuestion=?, PwdAnswer=? WHERE ShopperID=?";
+        // Prepare statement for execution
+        $stmt = $conn->prepare($qry);
 
-    $stmt->bind_param("sssssss", $_POST['name'], $_POST['address'], $_POST['country'], $_POST['phone'], $_POST['birthday'], $_POST['pwdquestion'], $_POST['pwdanswer']);
-    // Execute statement (SQL is more secure as it prevent risk of SQL Injection)
-    if ($stmt->execute()){ // SQL statement executed successfully
+        $stmt->bind_param("ssssssss", $_POST['name'], $_POST['address'], $_POST['country'], $_POST['phone'], $_POST['birthday'], $_POST['pwdquestion'], $_POST['pwdanswer'], $_SESSION["ShopperID"]);
+        // Execute statement (SQL is more secure as it prevent risk of SQL Injection)
+        if ($stmt->execute()){ // SQL statement executed successfully
+            // Refresh page
+            header("Location: index.php");
+            // Save the Shopper Name in a session variable
+            $_SESSION["ShopperName"] = $_POST['name'];
+        }
+        else{ // Display error message
+            $MainContent .= "<h3 style='color:red'>Error in inserting record</h3>";
+        }
+        // Release the resource allocated for prepared statement
+        $stmt->close();
+        // Close database connection
+        // allow maximum concurrent access
+        $conn->close();
+    }
+    else{
+        $qry = "SELECT * FROM shopper where Email=? and Email NOT LIKE ?";
+        $stmt = $conn->prepare($qry);
+        $stmt->bind_param("ss", $_POST['email'], $email);
+        $stmt->execute();
+        $result = $stmt->get_result();
+        $stmt->close();
+        $row = $result->fetch_array();
+        if (isset($row['Email'])){
+            $MainContent .= "<h3 style='color:red'>Email Exist</h3>";
+        }
+        else{
+            //Define the INSERT SQL Statement
+            $qry = "UPDATE Shopper SET Email=?, Name=?, Address=?, Country=?, Phone=?, BirthDate=?, PwdQuestion=?, PwdAnswer=? WHERE ShopperID=?";
+            // Prepare statement for execution
+            $stmt = $conn->prepare($qry);
 
-        $MainContent .= "Update Successfuly!";
-        // Save the Shopper Name in a session variable
-        $_SESSION["ShopperName"] = $_POST['name'];
+            $stmt->bind_param("sssssssss", $_POST['email'], $_POST['name'], $_POST['address'], $_POST['country'], $_POST['phone'], $_POST['birthday'], $_POST['pwdquestion'], $_POST['pwdanswer'], $_SESSION["ShopperID"]);
+            // Execute statement (SQL is more secure as it prevent risk of SQL Injection)
+            if ($stmt->execute()){ // SQL statement executed successfully
+                // Refresh page
+                header("Location: index.php");
+                // Save the Shopper Name in a session variable
+                $_SESSION["ShopperName"] = $_POST['name'];
+            }
+            else{ // Display error message
+                $MainContent .= "<h3 style='color:red'>Error in inserting record</h3>";
+            }
+            // Release the resource allocated for prepared statement
+            $stmt->close();
+            // Close database connection
+            // allow maximum concurrent access
+            $conn->close();
+        }
     }
-    else{ // Display error message
-        $MainContent .= "<h3 style='color:red'>Error in inserting record</h3>";
-    }
-    // Release the resource allocated for prepared statement
-    $stmt->close();
-    // Close database connection
-    // allow maximum concurrent access
-    $conn->close();
 }
 
 
