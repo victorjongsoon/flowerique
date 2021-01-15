@@ -28,7 +28,11 @@ if($email != "") {
     $stmt->close();
     $row = $result->fetch_array();
     if (isset($row['Email'])){
+        $MainContent = "<div style='width:100%; margin:auto;'>";
         $MainContent .= "<h3 style='color:red'>Email Exist</h3>";
+        $MainContent .= "<p>Click<a href='register.php'> here</a> to try again.</p>";
+        $MainContent .= "</div>";
+        
     }
     else{
         //Define the INSERT SQL Statement
