@@ -38,6 +38,12 @@ $MainContent .= "<select id='rating' name='rating'>
                     <option value='4'>4</option>
                     <option value='5'>5</option>
                  </select>";
+$MainContent .= "<div>Please rate our products and services:</div>";
+$MainContent .= "<div>1 - Extremely Poor</div>";
+$MainContent .= "<div>2 - Slightly Poor</div>";
+$MainContent .= "<div>3 - Average</div>";
+$MainContent .= "<div>4 - Above Average</div>";
+$MainContent .= "<div>5 - Excellent</div>";
 $MainContent .= "</div>";
 $MainContent .= "</div>";
 

@@ -116,7 +116,7 @@ $MainContent .= "<label class='col-sm-3 col-form-label' for='email'>
                  Email:</label>";
 $MainContent .= "<div class='col-sm-9'>";
 $MainContent .= "<input class='form-control' name='email' id='email' value='$email' 
-                        type='email' required />";
+                        type='email' required /> (required)";
 $MainContent .= "</div>";
 $MainContent .= "</div>";
 
