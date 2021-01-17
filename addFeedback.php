@@ -23,7 +23,7 @@ $MainContent .= "</div>";
 $MainContent .= "<div class='form-group row'>";
 $MainContent .= "<label class='col-sm-3 col-form-label' for='feedback'>Feedback:</label>";
 $MainContent .= "<div class='col-sm-9'>";
-$MainContent .= "<textarea class='form-control' name='feedback' id='feedback'
+$MainContent .= "<textarea required class='form-control' name='feedback' id='feedback'
                   cols='25' rows='4' ></textarea> (required)";
 $MainContent .= "</div>";
 $MainContent .= "</div>";
@@ -31,7 +31,7 @@ $MainContent .= "</div>";
 $MainContent .= "<div class='form-group row'>";
 $MainContent .= "<label class='col-sm-3 col-form-label' for='rating'>Rating:</label>";
 $MainContent .= "<div class='col-sm-9'>";
-$MainContent .= "<select id='rating' name='rating'>
+$MainContent .= "<select id='rating' name='rating' required>
                     <option value='1'>1</option>
                     <option value='2'>2</option>
                     <option value='3'>3</option>
