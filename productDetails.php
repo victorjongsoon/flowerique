@@ -1,7 +1,7 @@
 ﻿<?php 
 session_start(); // Detect the current session
 // Create a container, 90% width of viewport
-$MainContent = "<div style='width:90%; margin:auto;'>";
+$MainContent = "<div style='width:80%; margin:auto;'>";
 
 $pid=$_GET["pid"]; // Read Product ID from query string
 
@@ -25,7 +25,7 @@ while($row=$result->fetch_array())
     $MainContent.="</div>";
     #new role
     $MainContent.="<div class='row'>";
-    $MainContent.="<div class='col-sm-9' style='padding:5px'>";
+    $MainContent.="<div class='col-sm-8' style='padding:5px'>";
     $MainContent.= "<p>$row[ProductDesc]</p>";
 
     $qry= "SELECT s.SpecName, ps.SpecVal FROM productspec ps INNER JOIN specification s ON ps.SpecID= s.SpecID WHERE ps.ProductID=? ORDER BY ps.priority";
@@ -45,7 +45,7 @@ while($row=$result->fetch_array())
     
     $img="./Images/Products/$row[ProductImage]";
     $MainContent.="<div class='col-sm-3' style='vertical-align:top;padding:5px;'>";
-    $MainContent.="<p><img src='$img' /></p>";
+    $MainContent.="<p><img src='$img' class='img-fluid' /></p>";
 
     //product price
     $formattedPrice= number_format($row["Price"],2);
@@ -61,7 +61,7 @@ $MainContent.= "<input type='hidden' name ='action' value ='add'/>";
 $MainContent.= "<input type='hidden' name ='product_id' value ='$pid'/>";
 
 $MainContent.="Quantity: <input type='number' name='quantity' value='1' min='1' max ='10' style='width:40px' required/>";
-$MainContent.= "<button class='btn btn-primary type='submit'>Add to Cart</button>";
+$MainContent.= "<button class='button type='submit'>Add to Cart</button>";
 $MainContent.="</form>";
 $MainContent.="</div>";
 $MainContent.="</div>";

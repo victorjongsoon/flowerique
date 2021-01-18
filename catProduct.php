@@ -23,9 +23,9 @@ $stmt->execute();
 $result=$stmt->get_result();
 $stmt->close();
 
-while ($row=$result->fetch_array()) {
-    include('productListTemplate.php');
-}
+
+include('productListTemplate.php');
+
 // To Do:  Ending ....
 
 $conn->close(); // Close database connnection
