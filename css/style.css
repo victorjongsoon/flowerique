@@ -105,4 +105,15 @@ body {
 	font-size: 16px;
 	margin: 4px 2px;
 	cursor: pointer;
-  }
+}
+
+.category{
+	border: 2px solid gray;
+	overflow: hidden; /* this line added */
+	/* float: left; */
+    outline-offset: -16px;
+}
+
+.auto-margin {
+	margin:auto;
+}

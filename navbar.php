@@ -3,6 +3,14 @@
 //when shopper has yet to login,
 $content1 = "Welcome Guest<br />";
 $content2 = "<li class='nav-item'>
+            <div class='search-container'>
+            <form action='/action_page.php'>
+            <input type='text' placeholder='Search..' name='search'>
+            <button type='submit'><i class='fa fa-search'></i></button>
+            </form>
+            </div>
+            </li>
+            <li class='nav-item'>
 		     <a class='nav-link' href='register.php' style='color:#000000'>Sign Up</a></li>
 			 <li class='nav-item'>
              <a class='nav-link' href='login.php' style='color:#000000'>Login</a></li>

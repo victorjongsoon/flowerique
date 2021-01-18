@@ -46,7 +46,7 @@ $MainContent .= "<a href='product-details.php'><img src='Images/Products/Lavish_
 $MainContent .= "<div class='down-content'>";
 $MainContent .= "<a href='product-details.php'><h4>Lorem ipsum dolor sit amet.</h4></a>";
 $MainContent .= "<h6><small><del>$99.00</del></small>  $79.00</h6>";
-$MainContent .= "<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Non beatae soluta, placeat vitae cum maxime culpa itaque minima.</p>";
+$MainContent .= "<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Non beatae soluta, placeat vitae cum maxime culpa itaque masdk ajslkdjsad lsakdkals ds inima.</p>";
 $MainContent .= "</div>";
 $MainContent .= "</div>";
 $MainContent .= "</div>";
