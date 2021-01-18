@@ -2,14 +2,20 @@
 //Display guest welcome message, Login and Registration links
 //when shopper has yet to login,
 $content1 = "Welcome Guest<br />";
-$content2 = "<li class='nav-item'>
-            <div class='search-container'>
+$content2 = "
+     
+            <li class='nav-item'>
+
+            <span class='search-container'>
             <form action='/action_page.php'>
-            <input type='text' placeholder='Search..' name='search'>
+            <input type='text' placeholder='Search for product..' name='search'>
             <button type='submit'><i class='fa fa-search'></i></button>
             </form>
-            </div>
+            </span>
+    
+
             </li>
+            
             <li class='nav-item'>
 		     <a class='nav-link' href='register.php' style='color:#000000'>Sign Up</a></li>
 			 <li class='nav-item'>
@@ -22,13 +28,16 @@ if(isset($_SESSION["ShopperName"])) {
     //Display a greeting message, Change Password and logout links 
     //after shopper has logged in.
     $content1 = "Welcome <b>$_SESSION[ShopperName]</b>";
-    $content2 = "  <li class='nav-item'>
-        <div class='search-container' >
-            <form action='/action_page.php'>
-            <input type='text' placeholder='Search for products...' name='search'>
-            <button type='submit' style='background-color: #FFB6C1;'>Search</button>
-            </form>
-        </div>
+    $content2 = "    <li class='nav-item'>
+
+    <span class='search-container'>
+    <form action='/action_page.php'>
+    <input type='text' placeholder='Search for product..' name='search'>
+    <button type='submit'><i class='fa fa-search'></i></button>
+    </form>
+    </span>
+
+
     </li>
     <li class='nav-item'>
     <a class='nav-link' href='updateProfile.php' style='color:#000000'>Update Profile</a></li>
@@ -65,9 +74,9 @@ if(isset($_SESSION["ShopperName"])) {
             <li class="nav-item">
                 <a class="nav-link" href="category.php" style="color:#000000">Product Categories</a>
             </li>
-            <li class="nav-item">
+            <!-- <li class="nav-item">
                 <a class="nav-link" href="search.php" style="color:#000000">Product Search</a>
-            </li>
+            </li> -->
             <li class="nav-item">
                 <a class="nav-link" href="shoppingCart.php" style="color:#000000">Shopping Cart</a>
             </li>

@@ -6,9 +6,11 @@ $MainContent = "<div style='width:100%; margin:auto;'>";
 $MainContent .= "<link rel='stylesheet' href='css/site.css'>";
 // Display Page Header.
 $MainContent .= "<div class='row' style='padding:5px'>"; // Start header row
-$MainContent .= "<div class='col-12 ' align='center'>";
+$MainContent .= "<div class='col-12'>";
 $MainContent .= "<span class='page-title'>Product Categories</span>";
-$MainContent .= "<p>Select a category listed below:</p>";
+
+$MainContent .= "<hr style='height:5px;color:gray;'/>";
+
 $MainContent .= "</div>";
 $MainContent .= "</div>"; // End header row
 
@@ -24,15 +26,13 @@ $MainContent.="<div class='row justify-content-center'  align='center' >";
 
 while ($row=$result->fetch_array()) {
 
-    $MainContent.="<div class='col-3' style='	outline: 2px solid #eee;    outline-offset: -15px; border-radius:15px;
-    padding:25px
-    ' >";
+    $MainContent.="<div class='col-md-3 category-product'  >";
     // $MainContent.="<div class='row' style='display:flex; flex-wrap:wrap' >";
     // $MainContent.="<div class='col-12 border border-black rounded' style='margin:auto'; >";
     $img="./Images/category/$row[CatImage]";
     $MainContent.="<div >";
     $MainContent.="<img src='$img' style='margin-left:auto;  
-    '/>";
+    ' class='img-fluid'/>";
     $MainContent.="</div>";
     //encode special character(&)
     $catname=urlencode($row["CatName"]);
@@ -47,6 +47,7 @@ while ($row=$result->fetch_array()) {
     // $MainContent .= "</div>";
 
     // $MainContent .= "</div>";
+    
     
 
 }

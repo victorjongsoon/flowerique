@@ -97,8 +97,9 @@ body {
 .button {
 	background-color: #FFB6C1;
 	border: none;
+	border-radius: 15px;
 	color: black;
-	padding: 15px 32px;
+	padding: 8px 15px;
 	text-align: center;
 	text-decoration: none;
 	display: inline-block;
@@ -107,11 +108,11 @@ body {
 	cursor: pointer;
 }
 
-.category{
-	border: 2px solid gray;
-	overflow: hidden; /* this line added */
-	/* float: left; */
-    outline-offset: -16px;
+.category-product{
+	border: 5px solid #eee; 
+	border-radius:30px;
+    padding:15px;
+    margin:25px
 }
 
 .auto-margin {

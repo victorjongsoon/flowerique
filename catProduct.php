@@ -2,7 +2,7 @@
 // Detect the current session
 session_start();
 // Create a container, 60% width of viewport
-$MainContent = "<div style='width:60%; margin:auto;'>";
+$MainContent = "<div style='width:100%; margin:auto;'>";
 // Display Page Header - 
 // Category's name is read from query string passed from previous page.
 $MainContent .= "<div class='row' style='padding:5px'>";
