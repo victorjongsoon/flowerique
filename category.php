@@ -3,7 +3,7 @@
 session_start();
 // Create a container, 60% width of viewport
 $MainContent = "<div style='width:100%; margin:auto;'>";
-$MainContent .= "<link rel='stylesheet' href='css/site.css'>";
+// $MainContent .= "<link rel='stylesheet' href='css/site.css'>";
 // Display Page Header.
 $MainContent .= "<div class='row' style='padding:5px'>"; // Start header row
 $MainContent .= "<div class='col-12'>";

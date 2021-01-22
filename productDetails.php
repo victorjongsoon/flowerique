@@ -49,22 +49,29 @@ while($row=$result->fetch_array())
 
     //product price
     $formattedPrice= number_format($row["Price"],2);
+    $MainContent.="<div class='col-12 justify-content-center' style='margin-bottom:10px'>";
     $MainContent.="Price:<span  style='font-weight:bold; color:red;'> S$ $formattedPrice</span>";
+    $MainContent.="</div>";
 
 }
 
 // To Do 1:  Ending ....
 
 // To Do 2:  Create a Form for adding the product to shopping cart. Starting ....
+$MainContent.="<div class='col-12 justify-content-center'>";
 $MainContent.="<form action='cartFunctions.php' method='post'>";
 $MainContent.= "<input type='hidden' name ='action' value ='add'/>";
 $MainContent.= "<input type='hidden' name ='product_id' value ='$pid'/>";
 
-$MainContent.="Quantity: <input type='number' name='quantity' value='1' min='1' max ='10' style='width:40px' required/>";
-$MainContent.= "<button class='button type='submit'>Add to Cart</button>";
+$MainContent.="Quantity: <input type='number' name='quantity' value='1' min='1' max ='10' style='width:40px;margin-bottom:10px' required/>";
+$MainContent.= "<button class='button type='submit'><i class='fa fa-shopping-cart'></i>
+
+Add to Cart</button>";
 $MainContent.="</form>";
 $MainContent.="</div>";
 $MainContent.="</div>";
+$MainContent.="</div>";
+
 $MainContent .= "</div>"; // End of container
 include("MasterTemplate.php");  
 ?>
