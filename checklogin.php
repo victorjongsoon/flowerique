@@ -19,6 +19,10 @@ $result1 = $stmt->get_result();
 $stmt->close();
 
 if($result1->num_rows > 0){
+	//Unset any previous session to prevent any errors 
+	unset($_SESSION["ShopperName"]);
+	unset($_SESSION["NumCartItem"]);  
+	
 	$row1 = $result1->fetch_array();
 
 	if($pwd == $row1["Password"]){
@@ -27,6 +31,35 @@ if($result1->num_rows > 0){
 		// Save user's info in session variables
 		$_SESSION["ShopperName"] = $row1["Name"];
 		$_SESSION["ShopperID"] = $row1["ShopperID"];
+
+		// To Do 2 (Practical 4): Get active shopping cart
+		$qry = "SELECT ShopCartID FROM shopcart WHERE OrderPlaced = 0 ORDER BY ShopCartID DESC LIMIT 1"; 
+		$result = $conn->query($qry);
+		$row = $result->fetch_array();
+		if (empty($row["ShopCartID"])) {
+			unset($_SESSION["Cart"]);
+		}
+		else{
+			$_SESSION["Cart"] = $row["ShopCartID"];
+
+			//Retreive the shopping cart details 
+			$qry = "SELECT * FROM shopcartitem WHERE ShopCartID=?";
+			$stmt = $conn->prepare($qry);
+			$stmt->bind_param("i", $row["ShopCartID"]); //"i" - integer
+			$stmt->execute(); 
+			$result = $stmt->get_result(); //Store the results
+			$stmt->close();
+			
+			//Check if there is any item(s) in the shopping cart 
+			if ($result->num_rows >0) {
+				while ($row = $result->fetch_array()) {
+					$_SESSION["NumCartItem"] += $row["Quantity"];
+				}
+			}
+		}
+		// End of To Do 2
+
+		/* //Orginal code for To Do 2 (Practical 4): Get active shopping cart
 
 		// To Do 2 (Practical 4): Get active shopping cart
 		$qry = "SELECT ShopCartID FROM shopcart WHERE OrderPlaced = 0 ORDER BY ShopCartID DESC LIMIT 1";
@@ -55,6 +88,8 @@ if($result1->num_rows > 0){
 			}
 		}
 		// End of To Do 2
+
+		*/
 		
 	} 
 	else{

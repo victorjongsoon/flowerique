@@ -118,3 +118,20 @@ body {
 .auto-margin {
 	margin:auto;
 }
+
+/*Shopping Cart*/
+
+.sc-product-title {
+	font-weight: bold;
+	font-size: 14px; 
+}
+
+.sc-product-information {
+	font-size: 12px; 
+	color:#808080;
+}
+
+.sc-icon {
+	height: 20px;
+	width:20px;
+}
