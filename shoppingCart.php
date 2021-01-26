@@ -124,9 +124,9 @@ if (isset($_SESSION["Cart"])) {
 		//Adding radio buttons for selecting shipping methods
 		$MainContent .= "<br />";
 		$MainContent .= "<br />";
-		$MainContent .= "Normal Shipping:  <input type='radio' id='normalshipping' name='shippingmethod'  checked='checked' /> ";  //onclick='changeShippingMethod()'
+		$MainContent .= "Normal Shipping:  <input type='radio' id='Normal' value='Normal' name='shippingmethod'  checked='checked' /> ";  //onclick='changeShippingMethod()'
 		$MainContent .= "<br/> ";
-		$MainContent .= "Express Shipping: <input type='radio' id='expressshipping' name='shippingmethod' /> "; //onclick='changeShippingMethod()'
+		$MainContent .= "Express Shipping: <input type='radio' id='Express' value='Express' name='shippingmethod' /> "; //onclick='changeShippingMethod()'
 		$MainContent .= "<input type='hidden' name='subTotal' value='$subTotal'>";
 		// To Do 4 (Practical 4): 
 		// Display the subtotal at the end of the shopping cart

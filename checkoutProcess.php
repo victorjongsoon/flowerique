@@ -17,6 +17,7 @@ if($_POST) //Post Data received from Shopping cart page.
 		$shippingMethod = "Express";
 		$discount = 10;
 		$shippingCost = 10;
+		$_SESSION["ShipCharge"] = 10;
 	}
 	else
 	{
@@ -24,18 +25,20 @@ if($_POST) //Post Data received from Shopping cart page.
 		{
 			$shippingCost = 5;
 			$discount = 0;
+			$_SESSION["ShipCharge"] = 5;
 		}
 		elseif($shippingMethod == "Express")
 		{
 			$shippingCost = 10;
 			$discount = 0;
+			$_SESSION["ShipCharge"] = 10;
 		}
 	}
 	
-	$qry = "UPDATE ShopCart SET ShipCharge=?,Discount=? WHERE ShopCartID=?";
-	$stmt = $conn->prepare($qry);
-	$stmt->bind_param('iii',$shippingCost, $discount, $_SESSION["Cart"]);
-	$stmt->execute();
+	//$qry = "UPDATE ShopCart SET ShipCharge=?,Discount=? WHERE ShopCartID=?";
+	//$stmt = $conn->prepare($qry);
+	//$stmt->bind_param('iii',$shippingCost, $discount, $_SESSION["Cart"]);
+	//$stmt->execute();
 
 
 
@@ -90,10 +93,13 @@ if($_POST) //Post Data received from Shopping cart page.
 	}
 	
 	// To Do 1A: Compute GST amount 7% for Singapore, round the figure to 2 decimal places
-	$_SESSION["Tax"] = round($_SESSION["SubTotal"]*0.07, 2);
+	$_SESSION["Tax"] = round($_SESSION["SubTotal"]*0.08, 2);
 	
 	// To Do 1B: Compute Shipping charge - S$2.00 per trip
-	$_SESSION["ShipCharge"] = 2.00;
+	//$_SESSION["ShipCharge"] = 7.00;
+
+
+	
 		
 	
 	//Data to be sent to PayPal
