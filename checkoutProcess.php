@@ -8,6 +8,37 @@ if($_POST) //Post Data received from Shopping cart page.
 {
 	// To Do 6 (DIY): Check to ensure each product item saved in the associative
 	//                array is not out of stock
+
+
+	//Update Shipping Cost of ShopCart
+	$shippingMethod = $_POST["shippingmethod"];
+	if($_POST['subTotal'] > 200)
+	{
+		$shippingMethod = "Express";
+		$discount = 10;
+		$shippingCost = 10;
+	}
+	else
+	{
+		if($shippingMethod == "Normal")
+		{
+			$shippingCost = 5;
+			$discount = 0;
+		}
+		elseif($shippingMethod == "Express")
+		{
+			$shippingCost = 10;
+			$discount = 0;
+		}
+	}
+	
+	$qry = "UPDATE ShopCart SET ShipCharge=?,Discount=? WHERE ShopCartID=?";
+	$stmt = $conn->prepare($qry);
+	$stmt->bind_param('iii',$shippingCost, $discount, $_SESSION["Cart"]);
+	$stmt->execute();
+
+
+
 	
 	$emergencyExit = false;
 	$qry = "SELECT * FROM ShopCartItem WHERE ShopCartID=?";

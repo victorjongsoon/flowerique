@@ -9,6 +9,13 @@ if (! isset($_SESSION["ShopperID"])) {
 	exit;
 }
 
+
+//Setting default shipping method
+if (! isset($_SESSION["ShippingMethod"]))
+{
+	$_SESSION["ShippingMethod"] = "normaldelivery";
+}
+
 include_once("mysql_conn.php");
 
 $MainContent = "<div id='myShopCart' style='margin:auto'>";
@@ -108,6 +115,19 @@ if (isset($_SESSION["Cart"])) {
 		$MainContent .= "</table>";
 		$MainContent .= "</div>";
 				
+		
+		
+		
+		// To Do 7 (Practical 5):
+		// Add PayPal Checkout button on the shopping cart page
+		$MainContent .= "<form method='post' action='checkoutProcess.php'>";
+		//Adding radio buttons for selecting shipping methods
+		$MainContent .= "<br />";
+		$MainContent .= "<br />";
+		$MainContent .= "Normal Shipping:  <input type='radio' id='normalshipping' name='shippingmethod'  checked='checked' /> ";  //onclick='changeShippingMethod()'
+		$MainContent .= "<br/> ";
+		$MainContent .= "Express Shipping: <input type='radio' id='expressshipping' name='shippingmethod' /> "; //onclick='changeShippingMethod()'
+		$MainContent .= "<input type='hidden' name='subTotal' value='$subTotal'>";
 		// To Do 4 (Practical 4): 
 		// Display the subtotal at the end of the shopping cart
 		if($totalItems > 1){
@@ -128,10 +148,8 @@ if (isset($_SESSION["Cart"])) {
 		}else{
 			unset($_SESSION["NumCartItem"]);
 		}
-		
-		// To Do 7 (Practical 5):
-		// Add PayPal Checkout button on the shopping cart page
-		$MainContent .= "<form method='post' action='checkoutProcess.php'>";
+		$MainContent .= "<br/>";
+		$MainContent .= "<br/>";
 		$MainContent .= "<input type='image' style='float:right;'
 						 src='https://www.paypal.com/en_US/i/btn/btn_xpressCheckout.gif'>";
 		$MainContent .= "</form></p>";

@@ -137,4 +137,20 @@ function removeItem() {
 	header ("Location: shoppingCart.php");
 	exit;
 }		
+
+
+/*
+function changeShippingMethod() {
+	include_once("mysql_conn.php"); //Establish database connection handle: $conn 
+	if(($_SESSION["ShippingMethod"]) == "normaldelivery")
+	{
+		return;
+	}
+	elseif(($_SESSION["ShippingMethod"]) == "expressdelivery")
+	{
+		return;
+	}
+	return;
+} 
+*/
 ?>
