@@ -6,11 +6,16 @@
 
 $content1 = "Welcome Guest<br />";
 $searchBar ="<li class='nav-item'>
-
 <span class='search-container'>
-<form action='search.php' method='post'>
-<input type='text' placeholder='Search for product..',  name='keywords'>
-<button type='submit'><i class='fa fa-search'></i></button>
+<form action='search.php' method='get'>";
+if (isset($_SESSION['keywords'])) {
+    $searchBar.="<input type='search' placeholder='Search for product..',  name='keywords', value='$_SESSION[keywords]'>";
+}
+else{
+    $searchBar.="<input type='search' placeholder='Search for product..',  name='keywords'>";
+}
+
+$searchBar.="<button type='submit'><i class='fa fa-search'></i></button>
 </form>
 </span>
 </li>";

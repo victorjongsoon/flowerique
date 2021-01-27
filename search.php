@@ -4,7 +4,7 @@ session_start();
 
 // // HTML Form to collect search keyword and submit it to the same page 
 // // in server
-// $MainContent = "<div style='width:80%; margin:auto;'>"; // Container
+$MainContent = "<div style='width:80%; margin:auto;'>"; // Container
 // $MainContent .= "<form name='frmSearch' method='get' action=''>";
 // $MainContent .= "<div class='form-group row'>"; // 1st row
 // $MainContent .= "<div class='col-sm-9 offset-sm-3'>";
@@ -32,10 +32,11 @@ session_start();
 // $MainContent .= "</form>";
 
 // The search keyword is sent to server
-if (isset($_POST['keywords'])) {
+if (isset($_GET['keywords'])) {
     include_once('mysql_conn.php');
-	$SearchText="%".$_POST["keywords"]."%";
-
+    $_SESSION['keywords']=$_GET['keywords'];
+	$SearchText="%".$_GET["keywords"]."%";
+    echo($SearchText);
     // To Do (DIY): Retrieve list of product records with "ProductTitle" 
 	// contains the keyword entered by shopper, and display them in a table.
     $qry= "SELECT * FROM product WHERE ProductTitle LIKE ? OR ProductDesc LIKE ?";
@@ -46,22 +47,20 @@ if (isset($_POST['keywords'])) {
 
     $stmt->close();
     if ($result->num_rows>0){
-        header('Location: search_result.php?message='.$result->fetch_array());
 
-    //     while ($row=$result->fetch_array()) {
             
-    //         include('productListTemplate.php');
-    //     }
+            include('productListTemplate.php');
 
 
-    // }
-    // else{
-    //     $MainContent.="<h4 
-    //     style='color:red'>No Record Found</h3>";
-    // }
-	// To Do (DIY): End of Code
+
+     }
+     else{
+         $MainContent.="<h4 
+         style='color:red'>No Record Found</h3>";
+     }
+	 //To Do (DIY): End of Code
 }
-}
-// $MainContent .= "</div>"; // End of Container
-// include("MasterTemplate.php");
+
+$MainContent .= "</div>"; // End of Container
+include("MasterTemplate.php");
 ?>
