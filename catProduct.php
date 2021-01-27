@@ -16,7 +16,7 @@ include_once("mysql_conn.php");
 
 // To Do:  Starting ....
 $cid=$_GET["cid"];
-$qry ="SELECT p.ProductID, p.ProductTitle, p.ProductImage, p.Price, p.Quantity FROM CatProduct cp INNER JOIN product p ON cp.ProductID=p.ProductID where cp.CategoryID=?";
+$qry ="SELECT p.ProductID, p.ProductTitle, p.ProductImage, p.Price, p.Quantity FROM CatProduct cp INNER JOIN product p ON cp.ProductID=p.ProductID where cp.CategoryID=? ORDER BY p.ProductTitle";
 $stmt=$conn->prepare($qry);
 $stmt->bind_param("i",$cid);
 $stmt->execute();

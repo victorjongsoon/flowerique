@@ -28,6 +28,12 @@ while($row=$result->fetch_array())
     $MainContent.="<div class='col-sm-8' style='padding:5px'>";
     $MainContent.= "<p>$row[ProductDesc]</p>";
 
+    if ($row["Quantity"]<=0){
+        $noStock=True;
+    }
+    else{
+        $noStock=False;
+    }
     $qry= "SELECT s.SpecName, ps.SpecVal FROM productspec ps INNER JOIN specification s ON ps.SpecID= s.SpecID WHERE ps.ProductID=? ORDER BY ps.priority";
 
     $stmt=$conn->prepare($qry);
@@ -64,9 +70,19 @@ $MainContent.= "<input type='hidden' name ='action' value ='add'/>";
 $MainContent.= "<input type='hidden' name ='product_id' value ='$pid'/>";
 
 $MainContent.="Quantity: <input type='number' name='quantity' value='1' min='1' max ='10' style='width:40px;margin-bottom:10px' required/>";
-$MainContent.= "<button class='button type='submit'><i class='fa fa-shopping-cart'></i>
 
-Add to Cart</button>";
+    if (  $noStock==True){
+        $MainContent.="<div class='alert alert-danger' role='alert'>
+        Out Of Stock!
+      </div>";
+    }   
+    else{
+        $MainContent.= "<button class='button type='submit'><i class='fa fa-shopping-cart'></i>
+        Add to Cart</button>";
+    }
+
+
+
 $MainContent.="</form>";
 $MainContent.="</div>";
 $MainContent.="</div>";

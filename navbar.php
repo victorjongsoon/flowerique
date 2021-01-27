@@ -1,21 +1,21 @@
 <?php 
 //Display guest welcome message, Login and Registration links
 //when shopper has yet to login,
+
+
+
 $content1 = "Welcome Guest<br />";
-$content2 = "
-     
-            <li class='nav-item'>
+$searchBar ="<li class='nav-item'>
 
-            <span class='search-container'>
-            <form action='/action_page.php'>
-            <input type='text' placeholder='Search for product..' name='search'>
-            <button type='submit'><i class='fa fa-search'></i></button>
-            </form>
-            </span>
-    
-
-            </li>
-            
+<span class='search-container'>
+<form action='search.php' method='post'>
+<input type='text' placeholder='Search for product..',  name='keywords'>
+<button type='submit'><i class='fa fa-search'></i></button>
+</form>
+</span>
+</li>";
+$content2=$searchBar;
+$content2.= "
             <li class='nav-item'>
 		     <a class='nav-link' href='register.php' style='color:#000000'>Sign Up</a></li>
 			 <li class='nav-item'>
@@ -28,17 +28,9 @@ if(isset($_SESSION["ShopperName"])) {
     //Display a greeting message, Change Password and logout links 
     //after shopper has logged in.
     $content1 = "Welcome <b>$_SESSION[ShopperName]</b>";
-    $content2 = "    <li class='nav-item'>
+    $content2=$searchBar;
 
-    <span class='search-container'>
-    <form action='/action_page.php'>
-    <input type='text' placeholder='Search for product..' name='search'>
-    <button type='submit'><i class='fa fa-search'></i></button>
-    </form>
-    </span>
-
-
-    </li>
+    $content2 .= " 
     <li class='nav-item'>
     <a class='nav-link' href='updateProfile.php' style='color:#000000'>Update Profile</a></li>
     <li class='nav-item'>
