@@ -59,7 +59,7 @@ if (isset($_SESSION["Cart"])) {
 			$MainContent .= "<tr>"; 
 			$MainContent .= "<td><img class='img-fluid' src='./Images/Products/$row[ProductImage]' />";
 			//$MainContent .= "<td><img class='img-fluid' src=$img />";
-			$MainContent .= "<td style='width:50%'><span class='sc-product-title'>$row[Name]</span><br />";
+			$MainContent .= "<td style='width:50%'><span class='sc-product-title'><a href='productDetails.php?pid=$row[ProductID]'>$row[Name]</a></span><br />";
 			$MainContent .= "<span class='sc-product-information'>Product ID: $row[ProductID]</span></td>"; 
 			$formattedPrice = number_format($row["Price"], 2);
 			$MainContent .= "<td>$formattedPrice</td>";
