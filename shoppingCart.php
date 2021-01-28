@@ -64,9 +64,21 @@ if (isset($_SESSION["Cart"])) {
 			$formattedPrice = number_format($row["Price"], 2);
 			$MainContent .= "<td>$formattedPrice</td>";
 			$MainContent .= "<td>"; 
-			// Update quantity of purchase 
+			// Update quantity of purchase -
 			$MainContent .= "<form action='cartFunctions.php' method='post'>";
 			$MainContent.= "<select name='quantity' onChange='this.form.submit()'>";
+
+			//Retrieve Current GST Pricing 
+			$qry = "SELECT * FROM gst ORDER BY EffectiveDate DESC";
+			$result = $conn->query($qry);
+			$row = $result->fetch_array(); 
+			while(strtotime($row["EffectiveDate"]) > date("Y-m-d"))
+			{
+				$row = $result->fetch_array();
+			}
+			$currentTaxRate = $row["TaxRate"];
+			$currentTaxRateInRealPercentages = ($row["TaxRate"])/100;
+
 			for ($i =1; $i <= 10; $i++) {// To populate drop-down list from 1 to 10
 				if($i ==$row["Quantity"])
 					//Select the drop-down list item with value same as the quantity of purchase 
@@ -104,6 +116,9 @@ if (isset($_SESSION["Cart"])) {
 			// Accumulate the running sub-total
 			$subTotal += $row["Total"];
 
+			//Calculate the total tax rate
+			$totalTaxes = $subTotal*$currentTaxRateInRealPercentages;
+
 			//Codes to imput to show Shipping fee/Delivery Chargers 
 			if ($subTotal < 200){
 				$deliveryChargers =  "SGD$" . number_format(1,2);
@@ -139,6 +154,10 @@ if (isset($_SESSION["Cart"])) {
 		}
 		$MainContent .= "<br><style='text-align:right; font-size:15px'>
 						Shipping Fee: " . $deliveryChargers;	
+		$MainContent .= "<br><style='text-align:right; font-size:15px'>
+						Tax Fee: " . number_format($totalTaxes,2);	
+		$MainContent .= "<br><style='text-align:right; font-size:15px'>
+						CurrentTaxRateInRealPercentages: " . number_format($currentTaxRateInRealPercentages,2);	
 		$_SESSION["SubTotal"] =round($subTotal,2);
 
 		//Update on $SESSION["NumCartItem"]

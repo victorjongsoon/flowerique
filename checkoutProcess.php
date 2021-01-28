@@ -15,9 +15,10 @@ if($_POST) //Post Data received from Shopping cart page.
 	if($_POST['subTotal'] > 200)
 	{
 		$shippingMethod = "Express";
-		$discount = 10;
-		$shippingCost = 10;
-		$_SESSION["ShipCharge"] = 10;
+		//$discount = 10;
+		$shippingCost = 0;
+		$_SESSION["ShipCharge"] = 0;
+		$_SESSION["Discount"] = 0;
 	}
 	else
 	{
