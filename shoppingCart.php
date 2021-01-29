@@ -135,16 +135,18 @@ if (isset($_SESSION["Cart"])) {
 			$result = $conn->query($qry);
 			if($result->num_rows >0)
 			{
+				$todaysDate = new DateTime('now');
+				$Date = $todaysDate->format("Y-m-d");
 				$taxratenotdeterminedyet = True;
 				while($taxratenotdeterminedyet == True)
 				{
 					$row = $result->fetch_array();
-					if((strtotime($row["EffectiveDate"]) < date("Y-m-d")))
+					if((strtotime($row["EffectiveDate"]) <= $Date))                                               //  strtotime     date("Y-m-d")   (new DateTime() > new DateTime($row["EffectiveDate"]))
 					{
 						$taxratenotdeterminedyet = False;
-						$currentTaxRate = $row["TaxRate"];
-						$currentTaxRate = 8;
+						$currentTaxRate = $row["TaxRate"];                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                        $currentTaxRate = 8;
 					}
+					
 				}
 				
 			}
@@ -184,6 +186,7 @@ if (isset($_SESSION["Cart"])) {
 		$MainContent .= "<br/> ";
 		$MainContent .= "Express Shipping: <input type='radio' id='Express' value='Express' name='shippingmethod' /> "; //onclick='changeShippingMethod()'
 		$MainContent .= "<input type='hidden' name='subTotal' value='$subTotal'>";
+		$MainContent .= "<input type='hidden' name='totalTaxes' value='$totalTaxes'>";
 		// To Do 4 (Practical 4): 
 		// Display the subtotal at the end of the shopping cart
 		if($totalItems > 1){
@@ -197,10 +200,17 @@ if (isset($_SESSION["Cart"])) {
 						Shipping Fee: " . $deliveryChargers;	
 		$MainContent .= "<br><style='text-align:right; font-size:15px'>
 						Tax Fee: " . number_format($totalTaxes,2);	
+
+						/*
 		$MainContent .= "<br><style='text-align:right; font-size:15px'>
 						CurrentTaxRate: " . number_format($currentTaxRate,2);	
 		$MainContent .= "<br><style='text-align:right; font-size:15px'>
 						CurrentTaxRateInRealPercentages: " . number_format($currentTaxRateInRealPercentages,2);	
+		$MainContent .= "<br><style='text-align:right; font-size:15px'>
+						rowtaxrate: " . number_format($row["TaxRate"],2);	
+		$MainContent .= "<br><style='text-align:right; font-size:15px'>
+						effectivedate: " . $row["EffectiveDate"];	
+						*/
 		
 		$_SESSION["SubTotal"] =round($subTotal,2);
 
