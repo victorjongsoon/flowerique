@@ -67,17 +67,12 @@ if (isset($_SESSION["Cart"])) {
 			// Update quantity of purchase -
 			$MainContent .= "<form action='cartFunctions.php' method='post'>";
 			$MainContent.= "<select name='quantity' onChange='this.form.submit()'>";
+			
 
-			//Retrieve Current GST Pricing 
-			$qry = "SELECT * FROM gst ORDER BY EffectiveDate DESC";
-			$result = $conn->query($qry);
-			$row = $result->fetch_array(); 
-			while(strtotime($row["EffectiveDate"]) > date("Y-m-d"))
-			{
-				$row = $result->fetch_array();
-			}
-			$currentTaxRate = $row["TaxRate"];
-			$currentTaxRateInRealPercentages = ($row["TaxRate"])/100;
+
+			
+			
+			
 
 			for ($i =1; $i <= 10; $i++) {// To populate drop-down list from 1 to 10
 				if($i ==$row["Quantity"])
@@ -105,6 +100,8 @@ if (isset($_SESSION["Cart"])) {
 			$MainContent .= "</td>"; 
 			$MainContent .= "</tr>";
 
+			
+
 			// To Do 6 (Practical 5):
 		    // Store the shopping cart items in session variable as an associate array
 			$_SESSION["Items"] = array("productId"=>$row["ProductID"],
@@ -115,6 +112,50 @@ if (isset($_SESSION["Cart"])) {
 			
 			// Accumulate the running sub-total
 			$subTotal += $row["Total"];
+
+
+
+
+			//Retrieve Current GST Pricing 
+			/*
+			$qry = "SELECT * FROM gst ORDER BY EffectiveDate DESC";
+			$result = $conn->query($qry);
+			$row = $result->fetch_array(); 
+			$conn->close();
+			
+			while(strtotime($row["EffectiveDate"]) > date("Y-m-d"))
+			{
+				$row = $result->fetch_array();
+			}
+			$currentTaxRate = $row["TaxRate"];
+			$currentTaxRateInRealPercentages = ($row["TaxRate"])/100;
+
+			*/
+			$qry = "SELECT * FROM gst ORDER BY EffectiveDate DESC";
+			$result = $conn->query($qry);
+			if($result->num_rows >0)
+			{
+				$taxratenotdeterminedyet = True;
+				while($taxratenotdeterminedyet == True)
+				{
+					$row = $result->fetch_array();
+					if((strtotime($row["EffectiveDate"]) < date("Y-m-d")))
+					{
+						$taxratenotdeterminedyet = False;
+						$currentTaxRate = $row["TaxRate"];
+						$currentTaxRate = 8;
+					}
+				}
+				
+			}
+			else {
+				$currentTaxRate = 8;
+			}
+			//$row = $result->fetch_array(); 
+			//$conn->close();
+			//$currentTaxRate = $row["TaxRate"];
+			$currentTaxRateInRealPercentages = (($currentTaxRate)/100);
+
 
 			//Calculate the total tax rate
 			$totalTaxes = $subTotal*$currentTaxRateInRealPercentages;
@@ -157,7 +198,10 @@ if (isset($_SESSION["Cart"])) {
 		$MainContent .= "<br><style='text-align:right; font-size:15px'>
 						Tax Fee: " . number_format($totalTaxes,2);	
 		$MainContent .= "<br><style='text-align:right; font-size:15px'>
+						CurrentTaxRate: " . number_format($currentTaxRate,2);	
+		$MainContent .= "<br><style='text-align:right; font-size:15px'>
 						CurrentTaxRateInRealPercentages: " . number_format($currentTaxRateInRealPercentages,2);	
+		
 		$_SESSION["SubTotal"] =round($subTotal,2);
 
 		//Update on $SESSION["NumCartItem"]
