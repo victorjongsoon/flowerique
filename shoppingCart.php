@@ -131,6 +131,8 @@ if (isset($_SESSION["Cart"])) {
 			$currentTaxRateInRealPercentages = ($row["TaxRate"])/100;
 
 			*/
+
+			/*
 			$qry = "SELECT * FROM gst ORDER BY EffectiveDate DESC";
 			$result = $conn->query($qry);
 			if($result->num_rows >0)
@@ -153,9 +155,14 @@ if (isset($_SESSION["Cart"])) {
 			else {
 				$currentTaxRate = 8;
 			}
+			*/
+
+			
 			//$row = $result->fetch_array(); 
 			//$conn->close();
 			//$currentTaxRate = $row["TaxRate"];
+
+			$currentTaxRate = 8; //Temporary
 			$currentTaxRateInRealPercentages = (($currentTaxRate)/100);
 
 
