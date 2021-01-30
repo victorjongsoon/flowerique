@@ -4,12 +4,12 @@ session_start();
 
 // // HTML Form to collect search keyword and submit it to the same page 
 // // in server
-$MainContent = "<div style='width:80%; margin:auto;'>"; // Container
+$MainContent = "<div style='width:100%; margin:auto;'>"; // Container
 // $MainContent .= "<form name='frmSearch' method='get' action=''>";
 // $MainContent .= "<div class='form-group row'>"; // 1st row
-// $MainContent .= "<div class='col-sm-9 offset-sm-3'>";
-// $MainContent .= "<span class='page-title'>Product Search</span>";
-// $MainContent .= "</div>";
+$MainContent .= "<span class='page-title'>Search Result</span>";
+
+$MainContent .= "<hr style='height:5px;color:gray;'/>";
 // $MainContent .= "</div>"; // End of 1st row
 // $MainContent .= "<div class='form-group row'>"; // 2nd row
 // $MainContent .= "<label for='keywords' 
@@ -36,10 +36,9 @@ if (isset($_GET['keywords'])) {
     include_once('mysql_conn.php');
     $_SESSION['keywords']=$_GET['keywords'];
 	$SearchText="%".$_GET["keywords"]."%";
-    echo($SearchText);
     // To Do (DIY): Retrieve list of product records with "ProductTitle" 
 	// contains the keyword entered by shopper, and display them in a table.
-    $qry= "SELECT * FROM product WHERE ProductTitle LIKE ? OR ProductDesc LIKE ?";
+    $qry= "SELECT * FROM product WHERE ProductTitle LIKE ? OR ProductDesc LIKE ? ORDER BY ProductTitle";
     $stmt=$conn->prepare($qry);
     $stmt->bind_param('ss',$SearchText,$SearchText);
     $stmt->execute();

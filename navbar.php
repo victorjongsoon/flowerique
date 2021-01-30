@@ -1,3 +1,14 @@
+
+<script type='text/javascript'>
+var clear= function(){
+    alert("<?php          unset($_SESSION['keywords']);
+ ?>");
+
+  
+};
+
+</script>
+
 <?php 
 //Display guest welcome message, Login and Registration links
 //when shopper has yet to login,
@@ -9,13 +20,14 @@ $searchBar ="<li class='nav-item'>
 <span class='search-container'>
 <form action='search.php' method='get'>";
 if (isset($_SESSION['keywords'])) {
-    $searchBar.="<input type='search' placeholder='Search for product..',  name='keywords', value='$_SESSION[keywords]'>";
+    echo($_SESSION['keywords']);
+    $searchBar.="<input type='search' id='search'placeholder='Search for product..',  name='keywords', value='$_SESSION[keywords]',>";
 }
 else{
     $searchBar.="<input type='search' placeholder='Search for product..',  name='keywords'>";
 }
 
-$searchBar.="<button type='submit'><i class='fa fa-search'></i></button>
+$searchBar.="<button style= 'background-color: Transparent;border-radius: 10px;display: inline-block;'type='submit'><i class='fa fa-search'></i></button>
 </form>
 </span>
 </li>";

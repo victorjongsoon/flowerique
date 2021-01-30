@@ -8,6 +8,8 @@
         <!-- Latest compiled and minified CSS -->
         <link rel="stylesheet" href="css/bootstrap.min.css">
         <!-- JQuery Library -->
+        <link href="nouislider.css" rel="stylesheet">
+        <script src="nouislider.js"></script>
         <script src= js/jquery-3.3.1.min.js></script>
         <!-- Latest compiled JavaScript -->
         <script src= js/bootstrap.min.js></script>
