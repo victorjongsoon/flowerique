@@ -61,7 +61,7 @@ while($row=$result->fetch_array())
     $MainContent.="<div class='col-12 justify-content-center' style='margin-bottom:10px'>";
     if (new DateTime() > new DateTime($row["OfferStartDate"]) and new DateTime() < new DateTime($row["OfferEndDate"])) {
         $formmatedOfferedPrice=number_format($row["OfferedPrice"],2);
-        $MainContent.= "Price: <span style='font-weight:bold;color:red;'><del>S$ $formatedPrice</del> <ins class='offered-price d-inline'>S$$formmatedOfferedPrice</ins></span>";  
+        $MainContent.= "Price: <span><del>S$ $formatedPrice</del> <ins class='offered-price d-inline 'style='font-weight:bold;color:red;'>S$$formmatedOfferedPrice</ins></span>";  
     }
     else{
     $MainContent.="Price:<span  style='font-weight:bold; color:red;'> S$ $formatedPrice </span>";

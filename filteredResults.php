@@ -46,10 +46,15 @@
         else{
                 $occasion=$_GET["occasion"];
         }
+      
         
-        $MainContent .= "<div class='badge badge-pill badge-secondary mr-25'> > $ $minPrice</div>";
-        $MainContent .= "<div class='badge badge-pill badge-secondary mr-25' > < $ $maxPrice</div>";
-        $MainContent .= "<div class='badge badge-pill badge-secondary'> Ocassion: $occasion</div>";
+        $MainContent .= "<h5><div class='badge badge-pill badge-secondary mr-25'> > $ $minPrice</div></h5>";
+        $MainContent .= "<h5><div class='badge badge-pill badge-secondary mr-25' > < $ $maxPrice</div></h5>";
+        $MainContent .= "<h5><div class='badge badge-pill badge-secondary'> Occasion: $occasion</div></h5>";
+        if(isset($_GET["valid"])){
+                $showAvai="Only Available Items";
+                $MainContent .= "<h5><div class='badge badge-pill badge-secondary'> $showAvai</div></h5>";
+        }
         $MainContent .= "</div>";
         $MainContent.='</div>';
 

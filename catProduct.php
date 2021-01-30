@@ -64,10 +64,12 @@ include('productListTemplate.php');
 
 $MainContent.="</div>";
 // To Do:  Ending ....
-
 $conn->close(); // Close database connnection
+
 $MainContent .= "</div>"; // End of container
 include("MasterTemplate.php");  
+
+
 ?>
 
 

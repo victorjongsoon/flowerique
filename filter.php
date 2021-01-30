@@ -39,10 +39,10 @@ else{
 }
 
 
-$MainContent.='<div id="myDropdown" class="col-4 border rounded" style="display:None;">';
+$MainContent.='<div id="myDropdown" class="col-4  border-right " style="display:None;">';
 $MainContent.= '<form action="" method="get">
 <div class="form-group">
-<h3 align="center">Filtered Search</h3>
+<h3 align="center">Filter</h3>
 <label for="range">Price Range</label>
 <div class="row justify-content-center">
 <input type="number" class="form-control col-lg-5 col-sm-11" name="minPrice" placeholder="Min Price" min=0 >
@@ -52,7 +52,7 @@ $MainContent.= '<form action="" method="get">
 </div>
 </div>
 <div class="form-group">
-<label for="ocassion">Ocassion: </label>
+<label for="occasion">Occasion: </label>
 <select class="form-control col-12" name="occasion">';
 $MainContent.="<option value=''> ---Select Occasions --- </option>" ;
 while ($row2=$result2->fetch_array()) {
@@ -73,7 +73,10 @@ $MainContent.='</select>';
 
 
 $MainContent.='</div>';
-
+$MainContent.='  <div class="form-check">
+<input type="checkbox" class="form-check-input" name="valid" >
+<label class="form-check-label" >Only show available products</label>
+</div>';
 $MainContent.='<div class="float-right mt-25">';
 $MainContent.='<input type="submit" class="button" value="Search">';
 if(!isset($_GET['keywords'])){
@@ -85,6 +88,7 @@ if(!isset($_GET['keywords'])){
 else{
     $MainContent.="<input type='hidden' name='keywords' class='button' value='$_GET[keywords]'>";
 }
+
 $MainContent.='</div>';
 $MainContent.= '</form >';
 
@@ -122,8 +126,15 @@ $MainContent.='</div>';
         else{
             $maxPrice=$_GET['maxPrice'];
         }
+        if(isset($_GET["valid"])){
+            $onlyAvai=True;
+        }
+        else{
+            $onlyAvai=False;
+        }
 
-            $occasion= "%".$_GET["occasion"]."%";
+
+        $occasion= "%".$_GET["occasion"]."%";
 
         
         
@@ -131,7 +142,11 @@ $MainContent.='</div>';
         #case where the filter is being called from the search page
         if(!isset($_GET["cid"])){
 
-            $qry= "SELECT p.*,ps.*,s.* FROM product p INNER JOIN productspec ps ON p.productId= ps.productId INNER JOIN specification s ON ps.specId= s.specId WHERE (ProductTitle LIKE ? OR ProductDesc LIKE ?) AND p.Price>= ? AND p.Price<=? AND s.SpecName='Occasion' AND (ps.SpecVal LIKE ?) ORDER BY ProductTitle";
+            $qry= "SELECT p.*,ps.*,s.* FROM product p INNER JOIN productspec ps ON p.productId= ps.productId INNER JOIN specification s ON ps.specId= s.specId WHERE (ProductTitle LIKE ? OR ProductDesc LIKE ?) AND p.Price>= ? AND p.Price<=? AND s.SpecName='Occasion' AND (ps.SpecVal LIKE ?) ";
+            if($onlyAvai){
+                $qry.="AND  p.Quantity>0 ";
+            }
+            $qry.=" ORDER BY ProductTitle ";
             $stmt=$conn->prepare($qry);
             $stmt->bind_param('ssiis',$SearchText,$SearchText,$minPrice,$maxPrice,$occasion);
             $stmt->execute();
@@ -142,8 +157,13 @@ $MainContent.='</div>';
         }
         #when it is in the product category page
         else{
-            $qry= "SELECT p.*,ps.*,s.*,cp.* FROM product p INNER JOIN productspec ps ON p.productId= ps.productId INNER JOIN specification s ON ps.specId= s.specId INNER JOIN catProduct cp ON cp.productID = p.productID WHERE cp.categoryId= $cid AND p.Price>= ? AND p.Price<=? AND s.SpecName='Occasion' AND (ps.SpecVal LIKE ?)  ORDER BY ProductTitle";
+            $qry= "SELECT p.*,ps.*,s.*,cp.* FROM product p INNER JOIN productspec ps ON p.productId= ps.productId INNER JOIN specification s ON ps.specId= s.specId INNER JOIN catProduct cp ON cp.productID = p.productID WHERE cp.categoryId= $cid AND p.Price>= ? AND p.Price<=? AND s.SpecName='Occasion' AND (ps.SpecVal LIKE ?)  ";
+            if($onlyAvai){
+                $qry.=" AND p.Quantity>0 ";
+            }
+            $qry.=" ORDER BY ProductTitle ";
             $stmt=$conn->prepare($qry);
+
             $stmt->bind_param('iis',$minPrice,$maxPrice,$occasion);
             $stmt->execute();
             $result=$stmt->get_result();

@@ -53,14 +53,15 @@ while ($row=$result->fetch_array()) {
     
 
 }
+$conn->close(); // Close database connnection
 
 // To Do:  Ending ....
 
-$conn->close(); // Close database connnection
 $MainContent .= "</div>"; // End of container
 $MainContent .= "</div>"; // End of container
 
 $MainContent .= "</div>"; // End of container
 
 include("MasterTemplate.php"); 
+
 ?>
