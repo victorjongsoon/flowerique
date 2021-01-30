@@ -19,9 +19,8 @@ $content1 = "Welcome Guest<br />";
 $searchBar ="<li class='nav-item'>
 <span class='search-container'>
 <form action='search.php' method='get'>";
-if (isset($_SESSION['keywords'])) {
-    echo($_SESSION['keywords']);
-    $searchBar.="<input type='search' id='search'placeholder='Search for product..',  name='keywords', value='$_SESSION[keywords]',>";
+if (isset($_GET['keywords'])) {
+    $searchBar.="<input type='search' id='search'placeholder='Search for product..',  name='keywords', value='$_GET[keywords]',>";
 }
 else{
     $searchBar.="<input type='search' placeholder='Search for product..',  name='keywords'>";

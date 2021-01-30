@@ -19,24 +19,21 @@ $MainContent .= "<span class='page-title'>$_GET[catName]</span>";
 //   <a href="#">Link 3</a>
 // </div>
 // </div>';
-if (!isset($_SESSION['minPrice'])){
   $MainContent.='<div class="btn-group float-right">
   <input type="button" onclick= "myFunction()" class="btn button dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" value="Filter">
     
   
   ';
-}
-else{
-  $MainContent.='<div class="btn-group float-right">';
-  $MainContent.='<form method="get" action="clearFilter.php">';
-  $MainContent.='<input type="submit" class="button" value="Clear Filter">';
-  $MainContent.="<input type='hidden' name='catName' class='button' value='$_GET[catName]'>";
-  $MainContent.="<input type='hidden' name='cid' class='button' value='$_GET[cid]'>";
 
-  $MainContent.='</form>';
+  // $MainContent.='<div class="btn-group float-right">';
+  // $MainContent.='<form method="get" action="clearFilter.php">';
+  // $MainContent.='<input type="submit" class="button" value="Clear Filter">';
+  // $MainContent.="<input type='hidden' name='catName' class='button' value='$_GET[catName]'>";
+  // $MainContent.="<input type='hidden' name='cid' class='button' value='$_GET[cid]'>";
+
+  // $MainContent.='</form>';
 
 
-}
 
 
 $MainContent.='</div>';
