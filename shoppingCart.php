@@ -193,7 +193,8 @@ if (isset($_SESSION["Cart"])) {
 		$MainContent .= "Express Shipping: <input type='radio' id='Express' value='Express' name='shippingmethod' /> "; //onclick='changeShippingMethod()'
 		$MainContent .= "<input type='hidden' name='subTotal' value='$subTotal'>";
 		$MainContent .= "<input type='hidden' name='totalTaxes' value='$totalTaxes'>";
-		
+		$MainContent .= "<input type='hidden' name='grandTotal' value='$grandTotal'>";
+
 		// To Do 4 (Practical 4): 
 		// Display the subtotal at the end of the shopping cart
 		$MainContent .= "<p style='text-align:right; font-size:15px'> Subtotal (" . $totalItems . " items): SGD $" . number_format($subTotal,2);
