@@ -48,15 +48,24 @@ while($row=$result->fetch_array())
     $MainContent.="</div>";
 
     //right column
-    
+   
     $img="./Images/Products/$row[ProductImage]";
     $MainContent.="<div class='col-sm-3' style='vertical-align:top;padding:5px;'>";
+    if (new DateTime() > new DateTime($row["OfferStartDate"]) and new DateTime() < new DateTime($row["OfferEndDate"])) {    $MainContent.="<span class='badge badge-pill badge-info float-right'>On Offer!</span>";
+    }
     $MainContent.="<p><img src='$img' class='img-fluid' /></p>";
 
     //product price
-    $formattedPrice= number_format($row["Price"],2);
+    $formatedPrice= number_format($row["Price"],2);
+    $formmatedOfferedPrice=number_format($row["OfferedPrice"],2);
     $MainContent.="<div class='col-12 justify-content-center' style='margin-bottom:10px'>";
-    $MainContent.="Price:<span  style='font-weight:bold; color:red;'> S$ $formattedPrice</span>";
+    if (new DateTime() > new DateTime($row["OfferStartDate"]) and new DateTime() < new DateTime($row["OfferEndDate"])) {
+        $formmatedOfferedPrice=number_format($row["OfferedPrice"],2);
+        $MainContent.= "Price: <span><del>S$ $formatedPrice</del> <ins class='offered-price d-inline 'style='font-weight:bold;color:red;'>S$$formmatedOfferedPrice</ins></span>";  
+    }
+    else{
+    $MainContent.="Price:<span  style='font-weight:bold; color:red;'> S$ $formatedPrice </span>";
+    }
     $MainContent.="</div>";
 
 }
@@ -72,12 +81,12 @@ $MainContent.= "<input type='hidden' name ='product_id' value ='$pid'/>";
 $MainContent.="Quantity: <input type='number' name='quantity' value='1' min='1' max ='10' style='width:40px;margin-bottom:10px' required/>";
 
     if (  $noStock==True){
-        $MainContent.="<div class='alert alert-danger' role='alert'>
+        $MainContent.="<div class='alert alert-danger justify-content-center' role='alert'>
         Out Of Stock!
       </div>";
     }   
     else{
-        $MainContent.= "<button class='button type='submit'><i class='fa fa-shopping-cart'></i>
+        $MainContent.= "<button class='button justify-content-center' type='submit'><i class='fa fa-shopping-cart'></i>
         Add to Cart</button>";
     }
 

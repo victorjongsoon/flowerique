@@ -1,3 +1,6 @@
+
+
+
 <?php 
 //Display guest welcome message, Login and Registration links
 //when shopper has yet to login,
@@ -8,14 +11,14 @@ $content1 = "Welcome Guest<br />";
 $searchBar ="<li class='nav-item'>
 <span class='search-container'>
 <form action='search.php' method='get'>";
-if (isset($_SESSION['keywords'])) {
-    $searchBar.="<input type='search' placeholder='Search for product..',  name='keywords', value='$_SESSION[keywords]'>";
+if (isset($_GET['keywords'])) {
+    $searchBar.="<input type='search' id='search'placeholder='Search for product..',  name='keywords', value='$_GET[keywords]',>";
 }
 else{
     $searchBar.="<input type='search' placeholder='Search for product..',  name='keywords'>";
 }
 
-$searchBar.="<button type='submit'><i class='fa fa-search'></i></button>
+$searchBar.="<button style= 'background-color: Transparent;border-radius: 10px;display: inline-block;'type='submit'><i class='fa fa-search'></i></button>
 </form>
 </span>
 </li>";
@@ -47,6 +50,19 @@ if(isset($_SESSION["ShopperName"])) {
         $content1 .= ", $_SESSION[NumCartItem] item(s) in shopping cart";
     }
 }
+
+//get dropdown items
+include("mysql_conn.php");
+ $qry = "SELECT * FROM category";
+ $result2=$conn->query($qry);
+ $content3="";
+ while($row2=$result2->fetch_array()){
+    $catname=urlencode($row2["CatName"]);
+    $catProduct="catProduct.php?cid=$row2[CategoryID]&catName=$catname";
+    $content3.="<a class='dropdown-item' href='$catProduct'>$catname</a>";
+    
+ }
+
 ?>
 <!-- To Do 3 (Practical 1) - 
      Display a navbar which is visible before or after collapsing -->
@@ -68,8 +84,14 @@ if(isset($_SESSION["ShopperName"])) {
     <div class="collapse navbar-collapse" id="collapsibleNavbar">
         <!-- Left-justified menu items -->
         <ul class="navbar-nav mr-auto">
-            <li class="nav-item">
-                <a class="nav-link" href="category.php" style="color:#000000">Product Categories</a>
+         
+            <li class="nav-item dropdown">
+                <a class="nav-link dropdown-toggle" href="category.php"  aria-haspopup="true" aria-expanded="false"style="color:#000000">
+                Product Categories
+                </a>
+                <div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
+                    <?php echo $content3; ?>
+                </div>
             </li>
             <!-- <li class="nav-item">
                 <a class="nav-link" href="search.php" style="color:#000000">Product Search</a>

@@ -25,7 +25,10 @@ $MainContent.="<div class='col-12 auto-margin' align='center' style='margin:auto
 $MainContent.="<div class='row justify-content-center'  align='center' >";
 
 while ($row=$result->fetch_array()) {
-
+    //encode special character(&)
+    $catname=urlencode($row["CatName"]);
+    $catProduct="catProduct.php?cid=$row[CategoryID]&catName=$catname";
+    $MainContent.="<a href=$catProduct>";
     $MainContent.="<div class='col-md-3 category-product'  >";
     // $MainContent.="<div class='row' style='display:flex; flex-wrap:wrap' >";
     // $MainContent.="<div class='col-12 border border-black rounded' style='margin:auto'; >";
@@ -34,9 +37,7 @@ while ($row=$result->fetch_array()) {
     $MainContent.="<img src='$img' style='margin-left:auto;  
     ' class='img-fluid'/>";
     $MainContent.="</div>";
-    //encode special character(&)
-    $catname=urlencode($row["CatName"]);
-    $catProduct="catProduct.php?cid=$row[CategoryID]&catName=$catname";
+
     $MainContent.= "<div class='col-12' style='margin-top:20px';>";
     $MainContent.= "<p><a href=$catProduct>$row[CatName]</a></p>";
     $MainContent .= $row['CatDesc'];
@@ -44,6 +45,7 @@ while ($row=$result->fetch_array()) {
 
 
     $MainContent .= "</div>";
+    $MainContent.="</a>";
     // $MainContent .= "</div>";
 
     // $MainContent .= "</div>";
@@ -51,14 +53,15 @@ while ($row=$result->fetch_array()) {
     
 
 }
+$conn->close(); // Close database connnection
 
 // To Do:  Ending ....
 
-$conn->close(); // Close database connnection
 $MainContent .= "</div>"; // End of container
 $MainContent .= "</div>"; // End of container
 
 $MainContent .= "</div>"; // End of container
 
 include("MasterTemplate.php"); 
+
 ?>
