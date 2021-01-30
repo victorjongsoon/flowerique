@@ -186,9 +186,9 @@ if (isset($_SESSION["Cart"])) {
 		//Adding radio buttons for selecting shipping methods
 		$MainContent .= "<br />";
 		$MainContent .= "<br />";
-		$MainContent .= "Normal Shipping:  <input type='radio' id='Normal' value='Normal' name='shippingmethod'  checked='checked' /> ";  //onclick='changeShippingMethod()'
+		$MainContent .= "<input type='radio' id='Normal' value='Normal' name='shippingmethod'  checked='checked' /> ($5) Normal Shipping - Delivered within 2 working days";  //onclick='changeShippingMethod()'
 		$MainContent .= "<br/> ";
-		$MainContent .= "Express Shipping: <input type='radio' id='Express' value='Express' name='shippingmethod' /> "; //onclick='changeShippingMethod()'
+		$MainContent .= "<input type='radio' id='Express' value='Express' name='shippingmethod' />  ($10) Express Shipping - Delivered within 24 hours"; //onclick='changeShippingMethod()'
 		$MainContent .= "<input type='hidden' name='subTotal' value='$subTotal'>";
 		$MainContent .= "<input type='hidden' name='totalTaxes' value='$totalTaxes'>";
 		$MainContent .= "<input type='hidden' name='grandTotal' value='$grandTotal'>";
@@ -207,7 +207,7 @@ if (isset($_SESSION["Cart"])) {
 			$MainContent .= "<br><style='text-align:right; font-size:15px'>Grand Total: SGD $" . number_format($grandTotal,2);	
 		}else{
 			$MainContent .= "<br><style='text-align:right; font-size:15px'>Grand Total: SGD $" . number_format($grandTotal,2);	
-			$MainContent .= "<br><style='text-align:right; font-size:8px'>Price exluded delivery fee";	
+			$MainContent .= "<br><style='text-align:right; font-size:8px'>Grand Total excludes delivery fees";	
 		}
 
 						/*
