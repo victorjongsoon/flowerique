@@ -19,11 +19,26 @@ $MainContent .= "<span class='page-title'>$_GET[catName]</span>";
 //   <a href="#">Link 3</a>
 // </div>
 // </div>';
-$MainContent.='<div class="btn-group float-right">
-<button type="button" onclick= "myFunction()" class="btn button dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-  Filter
-</button>
-';
+if (!isset($_SESSION['minPrice'])){
+  $MainContent.='<div class="btn-group float-right">
+  <input type="button" onclick= "myFunction()" class="btn button dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" value="Filter">
+    
+  
+  ';
+}
+else{
+  $MainContent.='<div class="btn-group float-right">';
+  $MainContent.='<form method="get" action="clearFilter.php">';
+  $MainContent.='<input type="submit" class="button" value="Clear Filter">';
+  $MainContent.="<input type='hidden' name='catName' class='button' value='$_GET[catName]'>";
+  $MainContent.="<input type='hidden' name='cid' class='button' value='$_GET[cid]'>";
+
+  $MainContent.='</form>';
+
+
+}
+
+
 $MainContent.='</div>';
 
 $MainContent .= "<hr style='height:5px;color:gray;'/>";
@@ -37,7 +52,7 @@ $MainContent .= "</div>";
 include_once("mysql_conn.php"); 
 
 // To Do:  Starting ....
-$cid=$_GET["cid"];
+  $cid=$_GET["cid"];
 $qry ="SELECT p.* FROM CatProduct cp INNER JOIN product p ON cp.ProductID=p.ProductID where cp.CategoryID=? ORDER BY p.ProductTitle";
 $stmt=$conn->prepare($qry);
 $stmt->bind_param("i",$cid);

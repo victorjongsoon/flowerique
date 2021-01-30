@@ -55,7 +55,7 @@ if (isset($_GET['keywords'])) {
      }
      else{
          $MainContent.="<h4 
-         style='color:red'>No Record Found</h3>";
+         style='color:red'>No Record Found</h4>";
      }
 	 //To Do (DIY): End of Code
 }
