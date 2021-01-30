@@ -93,8 +93,6 @@ if (isset($_SESSION["Cart"])) {
 			$MainContent .= "</td>"; 
 			$MainContent .= "</tr>";
 
-			
-
 			// To Do 6 (Practical 5):
 		    // Store the shopping cart items in session variable as an associate array
 			$_SESSION["Items"] = array("productId"=>$row["ProductID"],
@@ -197,16 +195,19 @@ if (isset($_SESSION["Cart"])) {
 		// To Do 4 (Practical 4): 
 		// Display the subtotal at the end of the shopping cart
 		$MainContent .= "<p style='text-align:right; font-size:15px'> Subtotal (" . $totalItems . " items): SGD $" . number_format($subTotal,2);
-		if($deliveryChargers > 0){
-			$MainContent .= "<br><style='text-align:right; font-size:15px'> Shipping Fee: SGD $" . $deliveryChargers;	
-		}else{
+		if($subTotal >= 200){
+			//$MainContent .= "<br><style='text-align:right; font-size:15px'> Shipping Fee: SGD $" . $deliveryChargers;	
 			$MainContent .= "<br><style='text-align:right; font-size:15px'> Shipping Fee: Free";
 		}
 
 		$MainContent .= "<br><style='text-align:right; font-size:15px'>
 						Tax Fee: SGD $" . number_format($totalTaxes,2);	
-		$MainContent .= "<br><style='text-align:right; font-size:15px'>
-						Grand Total: SGD $" . number_format($grandTotal,2);	
+		if($subTotal >= 200){
+			$MainContent .= "<br><style='text-align:right; font-size:15px'>Grand Total: SGD $" . number_format($grandTotal,2);	
+		}else{
+			$MainContent .= "<br><style='text-align:right; font-size:15px'>Grand Total: SGD $" . number_format($grandTotal,2);	
+			$MainContent .= "<br><style='text-align:right; font-size:8px'>Price exluded delivery fee";	
+		}
 
 						/*
 		$MainContent .= "<br><style='text-align:right; font-size:15px'>
