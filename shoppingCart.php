@@ -67,13 +67,6 @@ if (isset($_SESSION["Cart"])) {
 			// Update quantity of purchase -
 			$MainContent .= "<form action='cartFunctions.php' method='post'>";
 			$MainContent.= "<select name='quantity' onChange='this.form.submit()'>";
-			
-
-
-			
-			
-			
-
 			for ($i =1; $i <= 10; $i++) {// To populate drop-down list from 1 to 10
 				if($i ==$row["Quantity"])
 					//Select the drop-down list item with value same as the quantity of purchase 
@@ -113,7 +106,23 @@ if (isset($_SESSION["Cart"])) {
 			// Accumulate the running sub-total
 			$subTotal += $row["Total"];
 
+			//Codes to input to get and show Shipping fee/Delivery Chargers 
+			if ($subTotal < 200){
+				$deliveryChargers =  1;
+			}else{
+				$deliveryChargers = 0;
+			}
 
+			//Codes to input to get current tax percentage from table, "gst"
+			$qry = "SELECT TaxRate FROM gst WHERE EffectiveDate IN (SELECT max(EffectiveDate) FROM gst);"; 
+			$result2 = $conn->query($qry);
+			while ($row2 = $result2->fetch_array()){
+				$taxCal = $row2["TaxRate"];
+			}
+			
+			//Codes to calculate total tax payable and grandtotal of the shopper purchase
+			$totalTaxes = ($subTotal/100) * $taxCal;
+			$grandTotal = $subTotal + $deliveryChargers + $totalTaxes; 
 
 
 			//Retrieve Current GST Pricing 
@@ -143,7 +152,7 @@ if (isset($_SESSION["Cart"])) {
 				while($taxratenotdeterminedyet == True)
 				{
 					$row = $result->fetch_array();
-					if((strtotime($row["EffectiveDate"]) <= $Date))                                               //  strtotime     date("Y-m-d")   (new DateTime() > new DateTime($row["EffectiveDate"]))
+					if((strtotime($row["EffectiveDate"]) <= $Date))     //  strtotime     date("Y-m-d")   (new DateTime() > new DateTime($row["EffectiveDate"]))
 					{
 						$taxratenotdeterminedyet = False;
 						$currentTaxRate = $row["TaxRate"];                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                        $currentTaxRate = 8;
@@ -162,26 +171,16 @@ if (isset($_SESSION["Cart"])) {
 			//$conn->close();
 			//$currentTaxRate = $row["TaxRate"];
 
-			$currentTaxRate = 8; //Temporary
-			$currentTaxRateInRealPercentages = (($currentTaxRate)/100);
+			//$currentTaxRate = 8; //Temporary
+			//$currentTaxRateInRealPercentages = (($currentTaxRate)/100);
 
 
 			//Calculate the total tax rate
-			$totalTaxes = $subTotal*$currentTaxRateInRealPercentages;
-
-			//Codes to imput to show Shipping fee/Delivery Chargers 
-			if ($subTotal < 200){
-				$deliveryChargers =  "SGD$" . number_format(1,2);
-			}else{
-				$deliveryChargers = " Free";
-			}
+			//$totalTaxes = $subTotal*$currentTaxRateInRealPercentages;
 		}
 		$MainContent .= "</tbody>";
 		$MainContent .= "</table>";
 		$MainContent .= "</div>";
-				
-		
-		
 		
 		// To Do 7 (Practical 5):
 		// Add PayPal Checkout button on the shopping cart page
@@ -194,19 +193,20 @@ if (isset($_SESSION["Cart"])) {
 		$MainContent .= "Express Shipping: <input type='radio' id='Express' value='Express' name='shippingmethod' /> "; //onclick='changeShippingMethod()'
 		$MainContent .= "<input type='hidden' name='subTotal' value='$subTotal'>";
 		$MainContent .= "<input type='hidden' name='totalTaxes' value='$totalTaxes'>";
+		
 		// To Do 4 (Practical 4): 
 		// Display the subtotal at the end of the shopping cart
-		if($totalItems > 1){
-			$MainContent .= "<p style='text-align:right; font-size:15px'>
-			Subtotal (" . $totalItems . " items): SGD$" . number_format($subTotal,2);
+		$MainContent .= "<p style='text-align:right; font-size:15px'> Subtotal (" . $totalItems . " items): SGD $" . number_format($subTotal,2);
+		if($deliveryChargers > 0){
+			$MainContent .= "<br><style='text-align:right; font-size:15px'> Shipping Fee: SGD $" . $deliveryChargers;	
 		}else{
-			$MainContent .= "<p style='text-align:right; font-size:15px'>
-			Subtotal (" . $totalItems . " item): SGD$" . number_format($subTotal,2);
+			$MainContent .= "<br><style='text-align:right; font-size:15px'> Shipping Fee: Free";
 		}
+
 		$MainContent .= "<br><style='text-align:right; font-size:15px'>
-						Shipping Fee: " . $deliveryChargers;	
+						Tax Fee: SGD $" . number_format($totalTaxes,2);	
 		$MainContent .= "<br><style='text-align:right; font-size:15px'>
-						Tax Fee: " . number_format($totalTaxes,2);	
+						Grand Total: SGD $" . number_format($grandTotal,2);	
 
 						/*
 		$MainContent .= "<br><style='text-align:right; font-size:15px'>
@@ -219,7 +219,7 @@ if (isset($_SESSION["Cart"])) {
 						effectivedate: " . $row["EffectiveDate"];	
 						*/
 		
-		$_SESSION["SubTotal"] =round($subTotal,2);
+		$_SESSION["SubTotal"] = round($subTotal,2);
 
 		//Update on $SESSION["NumCartItem"]
 		//Enforce $_SESSION["NumCartItem"] to be update items to be update continuously in the nav bar 
