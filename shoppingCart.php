@@ -125,11 +125,12 @@ if (isset($_SESSION["Cart"])) {
 		$MainContent .= "</table>";
 		$MainContent .= "</div>";
 
-		//Drop down list 
+		//Drop down list for delivery options
 		$MainContent .= "<b>Delivery option: </b>";
 		$MainContent .= "<form action='cartFunctions.php' method='post'>";
-		$MainContent.= "<select name='shippingSelection' onChange='this.form.submit()'>";
+		$MainContent.= "<select class='custom-select' name='shippingSelection' onChange='this.form.submit()'>";
 		$products = array("Normal" => "($5) Normal Shipping - Delivered within 2 working days", "Express" => "($10) Express Shipping - Delivered within 24 hours"); 
+		$MainContent.= "<optgroup>";
 		foreach($products as $key => $value){ 
 			if($key == $_SESSION['ShippingCost']){
 				//$selected = "selected";
@@ -138,6 +139,7 @@ if (isset($_SESSION["Cart"])) {
 				$MainContent .=  "<option value=$key> $value</option>";
 			}
 		}
+		$MainContent.= "</optgroup>";
 		$MainContent .= "</select>";
 		$MainContent .= "<input type='hidden' name='action' value='shipping' />";
 		$MainContent .= "</form>"; 
@@ -179,50 +181,6 @@ if (isset($_SESSION["Cart"])) {
 		$MainContent .= "<input type='hidden' name='shippingmethod' value='$_SESSION[ShippingCost]>"; // Add on  
 		$MainContent .= "<input type='hidden' name='grandTotal' value='$grandTotal'>";
 		$MainContent .= "</form></p>";
-
-		/* Orginal code for the paypal button here 
-		$MainContent .= "<br/>";
-		$MainContent .= "<br/>";
-		$MainContent .= "<input type='image' style='float:right;'
-						 src='https://www.paypal.com/en_US/i/btn/btn_xpressCheckout.gif'>";
-		$MainContent .= "</form></p>";
-		*/
-
-		/* Orignal codes from the radio button codes 
-		// Add PayPal Checkout button on the shopping cart page    // THIS PART NEED TO CHECK 
-		$MainContent .= "<form method='post' action='checkoutProcess.php'>";
-		//Adding radio buttons for selecting shipping methods
-		$MainContent .= "<br />";
-		$MainContent .= "<br />";
-		$MainContent .= "<input type='radio' id='Normal' value='Normal' name='shippingmethod'  checked='checked' /> ($5) Normal Shipping - Delivered within 2 working days";  //onclick='changeShippingMethod()'
-		$MainContent .= "<br/> ";
-		$MainContent .= "<input type='radio' id='Express' value='Express' name='shippingmethod' />  ($10) Express Shipping - Delivered within 24 hours"; //onclick='changeShippingMethod()'
-		$MainContent .= "<input type='hidden' name='subTotal' value='$subTotal'>";
-		$MainContent .= "<input type='hidden' name='totalTaxes' value='$totalTaxes'>";
-		$MainContent .= "<input type='hidden' name='shippingmethod' value='$deliveryChargers'>"; // Add on  
-		$MainContent .= "<input type='hidden' name='grandTotal' value='$grandTotal'>";
-		$MainContent .= "</form>";
-		*/
-
-		/*
-		$MainContent .= "<form action='cartFunctions.php' method='post'>";
-		$MainContent.= "<select name='shippingSelection' onChange='this.form.submit()'>";
-		$products = array("Normal" => "($5) Normal Shipping - Delivered within 2 working days", "Express" => "($10) Express Shipping - Delivered within 24 hours"); //"Peter"=>"35", "Ben"=>"37", "Joe"=>"43"
-		// Iterating through the product array
-		//$MainContent.= "<option value='' selected disabled hidden>Choose here</option>";
-		foreach($products as $key => $value){ 
-			if($key == $_SESSION['ShippingCost']){
-				//$selected = "selected";
-				$MainContent .=  "<option value=$key name='shippingmethod' selected>$value</option>";
-			}else{
-				$MainContent .=  "<option value=$key name='shippingmethod'> $value</option>";
-			}
-		}
-		$MainContent .= "</select>";
-		$MainContent .= "<input type='hidden' name='action' value='shipping' />";
-		$MainContent .= "</form>"; 
-		$MainContent .= "" .$_SESSION['ShippingCost'] ."<br>";
-		*/
 	}
 	else {
 		$MainContent .= "<h3 style='text-align:center; color:red;'>Empty shopping cart!</h3>";
