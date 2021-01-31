@@ -146,6 +146,24 @@ body {
 	text-decoration: none
 }
 
+/* Drop-Down List for shopping cart*/ 
+/*the container must be positioned relative:*/
+.custom-select {
+	position: absolute sticky;
+	font-family: Arial;
+	font-size: 13px;
+	width: 370px;
+	background-color: white;
+}
+
+
+.custom-select optgroup option { 
+    background-color: white;
+}
+
+.custom-select optgroup optgroup { 
+	  font-size:12px; 
+}
 
 @media all and (min-width: 992px) {
 	.navbar .nav-item .dropdown-menu{ display: none; }

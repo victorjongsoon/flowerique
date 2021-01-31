@@ -1,4 +1,18 @@
 <?php
+/*
+//GuoJun Paypal
+$PayPalMode 		= 'sandbox';//sandbox or live
+$PayPalApiUsername 	= 'sb-4pb47z4913671_api1.business.example.com'; 		//PayPal API Username
+$PayPalApiPassword 	= 'PVDDZYPB2582W2EA'; 		//Paypal API password
+$PayPalApiSignature = 'AVR36-.d75dIwvU9Du6PlbrPp.d.AKYyX3EkNb0O4lNwLNUAVVWw4agR'; 		//Paypal API Signature
+$PayPalCurrencyCode = 'SGD'; 	//Paypal Currency Code
+//URL to redirect to after PayPal has complete the online payment
+$PayPalReturnURL 	= 'http://localhost:8081/GitHub/flowerique/checkoutProcess.php'; 
+//URL to redirect to if user clicks cancel                
+$PayPalCancelURL 	= 'http://localhost:8081/GitHub/flowerique/shoppingCart.php'; 
+*/
+
+//Other Paypal 
 $PayPalMode 		= 'sandbox';//sandbox or live
 $PayPalApiUsername 	= 'sb-yplrc3951507_api1.business.example.com'; 		//PayPal API Username
 $PayPalApiPassword 	= '722YFWPQQTLRGBZ4'; 		//Paypal API password
@@ -8,7 +22,8 @@ $PayPalCurrencyCode = 'SGD'; 	//Paypal Currency Code
 $PayPalReturnURL 	= 'http://localhost:8081/flowerique/checkoutProcess.php'; 
 //URL to redirect to if user clicks cancel                
 $PayPalCancelURL 	= 'http://localhost:8081/flowerique/shoppingcart.php'; 
-                	
+
+
 function PPHttpPost($methodName_, $nvpStr_, $PayPalApiUsername, $PayPalApiPassword, 
                     $PayPalApiSignature, $PayPalMode) {
 	// Set up your API credentials, PayPal end point, and API version.
