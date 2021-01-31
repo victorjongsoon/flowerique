@@ -151,7 +151,8 @@ function shippingFee() {
 	}
 	// TO DO 2
 	// Write code to implement getting the user delivery choice to a session and lead back to shoppingCart.php
-	$_SESSION['ShippingCost'] = $_POST["shippingSelection"];  
+	$_SESSION['ShippingCost'] = $_POST["shippingSelection"];
+	//echo $_SESSION["ShippingCost"];
 	header ("Location: shoppingCart.php");
 	exit;
 }
