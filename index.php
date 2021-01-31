@@ -9,7 +9,7 @@ $MainContent .= "<div class='row'>";
 $MainContent .= "<div class='col-md-12'>";
 $MainContent .= "<div class='section-heading'>";
 $MainContent .= "<h2>Featured Products</h2>";
-$MainContent .= "<a href='products.php'>view more <i class='fa fa-angle-right'></i></a>";
+$MainContent .= "<a href='category.php'>view more <i class='fa fa-angle-right'></i></a>";
 $MainContent .= "<hr/>";
 $MainContent .= "</div>";
 $MainContent .= "</div>";
