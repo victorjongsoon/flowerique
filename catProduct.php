@@ -74,16 +74,7 @@ include("MasterTemplate.php");
 
 
 <script type="text/javascript">
-// var slider = document.getElementById('slider');
 
-// noUiSlider.create(slider, {
-//     start: [20, 80],
-//     connect: true,
-//     range: {
-//         'min': 0,
-//         'max': 100
-//     }
-//   };
 function myFunction() {
   
   var x = document.getElementById("myDropdown");
