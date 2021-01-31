@@ -309,8 +309,8 @@ if(isset($_GET["token"]) && isset($_GET["PayerID"]))
 			$conn->close();
 				  
 			// To Do 4A: Reset the "Number of Items in Cart" session variable to zero.
-			$_SESSION
-			["NumCartItem"]=0;
+			//$_SESSION["NumCartItem"]=0; //<-- GuoJun : Make changes to here only so that the number of item won't show on the nav once the payment is cleared.
+			unset($_SESSION["NumCartItem"]);
 
 	  		
 			// To Do 4B: Clear the session variable that contains Shopping Cart ID.

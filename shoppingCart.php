@@ -124,22 +124,6 @@ if (isset($_SESSION["Cart"])) {
 		$MainContent .= "</tbody>";
 		$MainContent .= "</table>";
 		$MainContent .= "</div>";
-		
-		/*
-		// Add PayPal Checkout button on the shopping cart page    // THIS PART NEED TO CHECK 
-		$MainContent .= "<form method='post' action='checkoutProcess.php'>";
-		//Adding radio buttons for selecting shipping methods
-		$MainContent .= "<br />";
-		$MainContent .= "<br />";
-		$MainContent .= "<input type='radio' id='Normal' value='Normal' name='shippingmethod'  checked='checked' /> ($5) Normal Shipping - Delivered within 2 working days";  //onclick='changeShippingMethod()'
-		$MainContent .= "<br/> ";
-		$MainContent .= "<input type='radio' id='Express' value='Express' name='shippingmethod' />  ($10) Express Shipping - Delivered within 24 hours"; //onclick='changeShippingMethod()'
-		$MainContent .= "<input type='hidden' name='subTotal' value='$subTotal'>";
-		$MainContent .= "<input type='hidden' name='totalTaxes' value='$totalTaxes'>";
-		$MainContent .= "<input type='hidden' name='shippingmethod' value='$deliveryChargers'>"; // Add on  
-		$MainContent .= "<input type='hidden' name='grandTotal' value='$grandTotal'>";
-		$MainContent .= "</form>";
-		*/
 
 		//Drop down list 
 		$MainContent .= "<b>Delivery option: </b>";
