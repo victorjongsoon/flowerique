@@ -19,11 +19,11 @@ $MainContent .= "<span class='page-title'>$_GET[catName]</span>";
 //   <a href="#">Link 3</a>
 // </div>
 // </div>';
-  $MainContent.='<div class="btn-group float-right">
-  <input type="button" onclick= "myFunction()" class="btn button dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" value="Filter">
-    
-  
+$filterbutton='<div class="btn-group float-right">
+<input type="button" onclick= "myFunction()" class="btn button dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" value="Filter">
   ';
+
+  $MainContent.=$filterbutton;
 
   // $MainContent.='<div class="btn-group float-right">';
   // $MainContent.='<form method="get" action="clearFilter.php">';
@@ -60,7 +60,7 @@ $stmt->close();
 $MainContent.="<div class='row'>";
 include_once('filter.php');
 
-include('productListTemplate.php');
+include_once('productListTemplate.php');
 
 $MainContent.="</div>";
 // To Do:  Ending ....

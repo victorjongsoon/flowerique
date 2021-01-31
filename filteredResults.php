@@ -1,4 +1,5 @@
-<?php $MainContent = "<div style='width:100%; margin:auto;'>";
+<?php 
+        $MainContent = "<div style='width:100%; margin:auto;'>";
         // Display Page Header - 
         // Category's name is read from query string passed from previous page.
         $MainContent .= "<div class='row' style='padding:5px'>";
@@ -56,18 +57,29 @@
                 $MainContent .= "<h5><div class='badge badge-pill badge-secondary'> $showAvai</div></h5>";
         }
         $MainContent .= "</div>";
-        $MainContent.='</div>';
+
 
 
         $MainContent .= "<hr style='height:5px;color:gray;'/>";
 
-        $MainContent .= "</div>";
 
-        $MainContent .= "</div>";
-        
+        if($noResult==FALSE){
+                include_once('productListTemplate.php');
 
-        include('productListTemplate.php');
-        $MainContent.="</div>";
+        }
+        else{
+                
+                $MainContent.='<div class="col-8">';
+                $filterButton='<form method="get" action="clearFilter.php">';
+                $MainContent.="<h4 
+                style='color:red'>No Record Found</h3>";
+                $MainContent.='</div >';
+
+        }
+      
+        $MainContent.="</div>";       
+           
+
         $MainContent .= "</div>"; // End of container
 
 ?>

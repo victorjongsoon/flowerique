@@ -16,7 +16,7 @@ $MainContent .= "</div>";
 
 include_once("mysql_conn.php");
 
-$qry ="SELECT * FROM product WHERE cast(now() as date) >= OfferStartDate AND cast(now() as date) <=OfferEndDate ORDER BY ProductTitle" ;
+$qry ="SELECT * FROM product WHERE cast(now() as date) > OfferStartDate AND cast(now() as date) <OfferEndDate ORDER BY ProductTitle" ;
 $result=$conn->query($qry);
 include_once('productListTemplate.php');
 
