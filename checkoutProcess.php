@@ -18,7 +18,6 @@ if($_POST) //Post Data received from Shopping cart page.
 		//$discount = 10;
 		$shippingCost = 0;
 		$_SESSION["ShipCharge"] = 0;
-		$_SESSION["Discount"] = 0;
 	}
 	else
 	{
@@ -36,12 +35,6 @@ if($_POST) //Post Data received from Shopping cart page.
 		}
 	}
 	
-	//$qry = "UPDATE ShopCart SET ShipCharge=?,Discount=? WHERE ShopCartID=?";
-	//$stmt = $conn->prepare($qry);
-	//$stmt->bind_param('iii',$shippingCost, $discount, $_SESSION["Cart"]);
-	//$stmt->execute();
-
-
 
 	
 	$emergencyExit = false;
@@ -93,12 +86,9 @@ if($_POST) //Post Data received from Shopping cart page.
 		$paypal_data .= '&L_PAYMENTREQUEST_0_NUMBER'.$key.'='.urlencode($item["productId"]);
 	}
 	
-	// To Do 1A: Compute GST amount 7% for Singapore, round the figure to 2 decimal places
-	$_SESSION["Tax"] = round($_SESSION["SubTotal"]*0.08, 2);
+	// To Do 1A: Receive Taxes Amount from ShoppingCart.php
+	$_SESSION["Tax"] = $_POST["totalTaxes"];
 	
-	// To Do 1B: Compute Shipping charge - S$2.00 per trip
-	//$_SESSION["ShipCharge"] = 7.00;
-
 
 	
 		
@@ -114,7 +104,7 @@ if($_POST) //Post Data received from Shopping cart page.
 			  '&PAYMENTREQUEST_0_ITEMAMT='.urlencode($_SESSION["SubTotal"]). 
 			  '&PAYMENTREQUEST_0_SHIPPINGAMT='.urlencode($_SESSION["ShipCharge"]). 
 			  '&PAYMENTREQUEST_0_TAXAMT='.urlencode($_SESSION["Tax"]). 	
-			  '&BRANDNAME='.urlencode("Mamaya e-BookStore").
+			  '&BRANDNAME='.urlencode("Flowerique").
 			  $paypal_data.				
 			  '&RETURNURL='.urlencode($PayPalReturnURL ).
 			  '&CANCELURL='.urlencode($PayPalCancelURL);	
@@ -228,7 +218,7 @@ if(isset($_GET["token"]) && isset($_GET["PayerID"]))
 		$total=$_SESSION["SubTotal"] +$_SESSION["Tax"]+$_SESSION["ShipCharge"];
 		$qry="UPDATE shopcart SET OrderPlaced=1,Quantity=?,SubTotal=?,ShipCharge=?,Tax=?,Total=? WHERE ShopCartID=?";
 		$stmt= $conn->prepare($qry);
-		$stmt->bind_param("iddddi",$_SESSION["NumCartItem"],$_SESSION["Subtotal"],$_SESSION["ShipCharge"],$_SESSION["Tax"],$total,$_SESSION["Cart"]);
+		$stmt->bind_param("iddddi",$_SESSION["NumCartItem"],$_SESSION["SubTotal"],$_SESSION["ShipCharge"],$_SESSION["Tax"],$total,$_SESSION["Cart"]);
 		$stmt->execute();
 		$stmt->close(); 
 		
@@ -267,13 +257,44 @@ if(isset($_GET["token"]) && isset($_GET["PayerID"]))
 			
 			$ShipEmail = urldecode($httpParsedResponseAr["EMAIL"]);			
 			
+
+			$deliveryDate = new DateTime();
+			if($_SESSION["ShipCharge"] == 0)
+			{
+				date_add($deliveryDate, date_interval_create_from_date_string("1 days"));
+				$deliveryDateString = $deliveryDate->format('Y-m-d');
+				$shippingMethod = "Express";
+			}
+			elseif($_SESSION["ShipCharge"] == 5)
+			{
+				date_add($deliveryDate, date_interval_create_from_date_string("2 days"));
+				$deliveryDateString = $deliveryDate->format('Y-m-d');
+				$shippingMethod = "Normal";
+			}
+			elseif($_SESSION["ShipCharge"] == 10)
+			{
+				date_add($deliveryDate, date_interval_create_from_date_string("1 days"));
+				$deliveryDateString = $deliveryDate->format('Y-m-d');
+				$shippingMethod = "Express";
+			}
+
+			//Retrieve the user's phone number and enter it into orderdata
+			
+			$qry = "SELECT * FROM shopper WHERE ShopperID=?";
+			$stmt=$conn->prepare($qry);
+			$stmt->bind_param('i',$_SESSION["ShopperID"]);
+			$stmt->execute();
+			$result = $stmt->get_result();
+			//$stmt->close();
+			$row = $result->fetch_array();
+			$phoneNumber = $row["Phone"];
+
 			// To Do 3: Insert an Order record with shipping information
 			//          Get the Order ID and save it in session variable.
-
-			$qry="INSERT INTO orderdata(ShipName,ShipAddress,ShipCountry,ShipEmail,ShopCartID) VALUES(?,?,?,?,?)";
+			$qry="INSERT INTO orderdata(ShipName,ShipAddress,ShipCountry,ShipPhone,ShipEmail,ShopCartID,DeliveryDate,DeliveryMode) VALUES(?,?,?,?,?,?,?,?)";
 
 			$stmt=$conn->prepare($qry);
-			$stmt->bind_param("ssssi",$ShipName,$ShipAddress,$ShipCountry,$ShipEmail,$_SESSION["Cart"]);
+			$stmt->bind_param("sssssiss",$ShipName,$ShipAddress,$ShipCountry,$phoneNumber,$ShipEmail,$_SESSION["Cart"],$deliveryDateString,$shippingMethod);
 			$stmt->execute();
 			$stmt->close();
 			$qry="SELECT LAST_INSERT_ID() AS OrderID";
@@ -281,7 +302,9 @@ if(isset($_GET["token"]) && isset($_GET["PayerID"]))
 			$row=$result->fetch_array();
 			$_SESSION["OrderID"]=$row["OrderID"];
 			
-			// End of To Do 3
+			
+
+			
 				
 			$conn->close();
 				  
