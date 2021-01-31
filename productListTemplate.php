@@ -77,9 +77,9 @@ while ($row=$result->fetch_array()) {
 }
 //to add hiddeen divs to fill up empty space to make layout consistent
 //only when it is more than one row
+
 if($index>3){
 
-    echo("TEST");
 
 for ($i=0;$i<3;$i++ ){
 

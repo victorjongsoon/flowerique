@@ -60,7 +60,7 @@ $stmt->close();
 $MainContent.="<div class='row'>";
 include_once('filter.php');
 
-include('productListTemplate.php');
+include_once('productListTemplate.php');
 
 $MainContent.="</div>";
 // To Do:  Ending ....

@@ -64,7 +64,7 @@
 
 
         if($noResult==FALSE){
-                include('productListTemplate.php');
+                include_once('productListTemplate.php');
 
         }
         else{
