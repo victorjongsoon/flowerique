@@ -10,11 +10,12 @@ $MainContent = "<div style='width:100%; margin:auto;'>"; // Container
 $MainContent .= "<div class='row' style='padding:5px'>";
 $MainContent .= "<div class='col-12'>";
 $MainContent .= "<span class='page-title'>Search Result</span>";
-$MainContent.='<div class="btn-group float-right">
+$filterbutton='<div class="btn-group float-right">
 <input type="button" onclick= "myFunction()" class="btn button dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" value="Filter">
-  
+  ';
 
-';
+$MainContent.=$filterbutton;
+
 $MainContent.='</div>';
 
 
@@ -62,7 +63,7 @@ if (isset($_GET['keywords'])) {
         $MainContent.="<div class='row'>";
         include_once('filter.php');
         
-        include('productListTemplate.php');
+        include_once('productListTemplate.php');
         
         $MainContent.="</div>";
             

@@ -142,13 +142,13 @@ $MainContent.='</div>';
         #case where the filter is being called from the search page
         if(!isset($_GET["cid"])){
 
-            $qry= "SELECT p.*,ps.*,s.* FROM product p INNER JOIN productspec ps ON p.productId= ps.productId INNER JOIN specification s ON ps.specId= s.specId WHERE (ProductTitle LIKE ? OR ProductDesc LIKE ?) AND p.Price>= ? AND p.Price<=? AND s.SpecName='Occasion' AND (ps.SpecVal LIKE ?) ";
+            $qry= "SELECT p.*,ps.*,s.* FROM product p INNER JOIN productspec ps ON p.productId= ps.productId INNER JOIN specification s ON ps.specId= s.specId WHERE (ProductTitle LIKE ? OR ProductDesc LIKE ?) AND ((p.Price>= ? AND p.Price<=? ) OR( p.OfferedPrice>=? AND p.OfferedPrice<=?)) AND s.SpecName='Occasion' AND (ps.SpecVal LIKE ?) ";
             if($onlyAvai){
                 $qry.="AND  p.Quantity>0 ";
             }
             $qry.=" ORDER BY ProductTitle ";
             $stmt=$conn->prepare($qry);
-            $stmt->bind_param('ssiis',$SearchText,$SearchText,$minPrice,$maxPrice,$occasion);
+            $stmt->bind_param('ssiiiis',$SearchText,$SearchText,$minPrice,$maxPrice,$minPrice,$maxPrice,$occasion);
             $stmt->execute();
             $result=$stmt->get_result();
 
@@ -157,14 +157,14 @@ $MainContent.='</div>';
         }
         #when it is in the product category page
         else{
-            $qry= "SELECT p.*,ps.*,s.*,cp.* FROM product p INNER JOIN productspec ps ON p.productId= ps.productId INNER JOIN specification s ON ps.specId= s.specId INNER JOIN catProduct cp ON cp.productID = p.productID WHERE cp.categoryId= $cid AND p.Price>= ? AND p.Price<=? AND s.SpecName='Occasion' AND (ps.SpecVal LIKE ?)  ";
+            $qry= "SELECT p.*,ps.*,s.*,cp.* FROM product p INNER JOIN productspec ps ON p.productId= ps.productId INNER JOIN specification s ON ps.specId= s.specId INNER JOIN catProduct cp ON cp.productID = p.productID WHERE cp.categoryId= $cid AND ((p.Price>= ? AND p.Price<=?) OR( p.OfferedPrice>=? AND p.OfferedPrice<=?)) AND s.SpecName='Occasion' AND (ps.SpecVal LIKE ?)  ";
             if($onlyAvai){
                 $qry.=" AND p.Quantity>0 ";
             }
             $qry.=" ORDER BY ProductTitle ";
             $stmt=$conn->prepare($qry);
 
-            $stmt->bind_param('iis',$minPrice,$maxPrice,$occasion);
+            $stmt->bind_param('iiiis',$minPrice,$maxPrice,$minPrice,$maxPrice,$occasion);
             $stmt->execute();
             $result=$stmt->get_result();
             $stmt->close();
@@ -172,18 +172,16 @@ $MainContent.='</div>';
         }
     
  
-    
-    if ($result->num_rows>0){
-        // header("location: catProduct.php?cid=$_GET[cid]&catName=$_GET[catName]&minPrice=$_GET[minPrice]&maxPrice=$_GET[maxPrice]");
-        include('filteredResults.php');
-     }
-     else{
-        $MainContent.='<div class="col-8">';
-        $MainContent.="<h4 
-        style='color:red'>No Record Found</h3>";
-        $MainContent.='</div >';
+    $noResult=True;
 
+    if ($result->num_rows>0){
+     
+        $noResult=False;
      }
+     
+     include('filteredResults.php');
+
+ 
     }
     
 
