@@ -173,12 +173,13 @@ if (isset($_SESSION["Cart"])) {
 		}
 
 		// Add PayPal Checkout button on the shopping cart page // New Version 
+		//$shippingmethod = $_SESSION["ShippingCost"];
 		$MainContent .= "<form method='post' action='checkoutProcess.php'>";
 		$MainContent .= "<input type='image' style='float:right;'
 						src='https://www.paypal.com/en_US/i/btn/btn_xpressCheckout.gif'>";
 		$MainContent .= "<input type='hidden' name='subTotal' value='$subTotal'>";
 		$MainContent .= "<input type='hidden' name='totalTaxes' value='$totalTaxes'>";
-		$MainContent .= "<input type='hidden' name='shippingmethod' value='$_SESSION[ShippingCost]>"; // Add on  
+		$MainContent .= "<input type='hidden' name='shippingmethod' value='$_SESSION[ShippingCost]'>"; // Add on  
 		$MainContent .= "<input type='hidden' name='grandTotal' value='$grandTotal'>";
 		$MainContent .= "</form></p>";
 	}
