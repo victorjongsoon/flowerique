@@ -11,7 +11,10 @@ if (isset($_POST['action'])) {
             break;
 		case 'remove':
             removeItem();
-            break;
+			break;
+		case 'shipping':
+			shippingFee();
+			break;
     }
 }
 
@@ -136,7 +139,22 @@ function removeItem() {
 	$conn->close(); 
 	header ("Location: shoppingCart.php");
 	exit;
-}		
+}
+
+
+function shippingFee() {
+	// Check if shopping cart exists 
+	if (! isset($_SESSION["Cart"])) {
+		// redirect to login page if the session variable cart is not set
+		header ("Location: login.php");
+		exit;
+	}
+	// TO DO 2
+	// Write code to implement getting the user delivery choice to a session and lead back to shoppingCart.php
+	$_SESSION['ShippingCost'] = $_POST["shippingSelection"];  
+	header ("Location: shoppingCart.php");
+	exit;
+}
 
 
 /*

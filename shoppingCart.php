@@ -9,18 +9,21 @@ if (! isset($_SESSION["ShopperID"])) {
 	exit;
 }
 
-
 //Setting default shipping method
 if (! isset($_SESSION["ShippingMethod"]))
 {
 	$_SESSION["ShippingMethod"] = "normaldelivery";
 }
 
+if (!isset($_SESSION["ShippingCost"]))
+{
+	$_SESSION['ShippingCost'] == "Normal";
+}
+
 include_once("mysql_conn.php");
 
 $MainContent = "<div id='myShopCart' style='margin:auto'>";
 if (isset($_SESSION["Cart"])) {
-	// To Do 1 (Practical 4): 
 	// Retrieve from database and display shopping cart in a table
 	$qry = "SELECT ShopCartItem.*, Product.ProductImage, Product.ProductDesc, (ShopCartItem.Price*ShopCartItem.Quantity) AS Total 
 			FROM ShopCartItem INNER JOIN Product ON ShopCartItem.ProductID=Product.ProductID WHERE ShopCartID=?"; 
@@ -31,7 +34,6 @@ if (isset($_SESSION["Cart"])) {
 	$stmt->close();
 	
 	if ($result->num_rows > 0) {
-		// To Do 2 (Practical 4): Format and display 
 		// the page header and header row of shopping cart page
 		$MainContent .= "<p class='page-title' style='text-align:center'>Shopping Cart</p>"; 
 		$MainContent .= "<div class='table-responsive' >";
@@ -46,14 +48,13 @@ if (isset($_SESSION["Cart"])) {
 		$MainContent .= "</tr>";
 		$MainContent .= "</thead>";
 		
-		// To Do 5 (Practical 5):
 		// Declare an array to store the shopping cart items in session variable 
 		$_SESSION["Items"] = array();
-		
-		// To Do 3 (Practical 4): 
+		 
 		// Display the shopping cart content
 		$subTotal = 0; // Declare a variable to compute subtotal before tax
 		$totalItems = 0;
+
 		$MainContent .= "<tbody>";
 		while ($row = $result->fetch_array()) {
 			$MainContent .= "<tr>"; 
@@ -93,7 +94,6 @@ if (isset($_SESSION["Cart"])) {
 			$MainContent .= "</td>"; 
 			$MainContent .= "</tr>";
 
-			// To Do 6 (Practical 5):
 		    // Store the shopping cart items in session variable as an associate array
 			$_SESSION["Items"] = array("productId"=>$row["ProductID"],
 									   "name"=>$row["Name"],
@@ -106,7 +106,11 @@ if (isset($_SESSION["Cart"])) {
 
 			//Codes to input to get and show Shipping fee/Delivery Chargers 
 			if ($subTotal < 200){
-				$deliveryChargers =  1;
+				if ($_SESSION['ShippingCost'] == "Normal"){
+					$deliveryChargers =  5;
+				}else{
+					$deliveryChargers =  10;
+				}
 			}else{
 				$deliveryChargers = 0;
 			}
@@ -121,67 +125,12 @@ if (isset($_SESSION["Cart"])) {
 			//Codes to calculate total tax payable and grandtotal of the shopper purchase
 			$totalTaxes = ($subTotal/100) * $taxCal;
 			$grandTotal = $subTotal + $deliveryChargers + $totalTaxes; 
-
-
-			//Retrieve Current GST Pricing 
-			/*
-			$qry = "SELECT * FROM gst ORDER BY EffectiveDate DESC";
-			$result = $conn->query($qry);
-			$row = $result->fetch_array(); 
-			$conn->close();
-			
-			while(strtotime($row["EffectiveDate"]) > date("Y-m-d"))
-			{
-				$row = $result->fetch_array();
-			}
-			$currentTaxRate = $row["TaxRate"];
-			$currentTaxRateInRealPercentages = ($row["TaxRate"])/100;
-
-			*/
-
-			/*
-			$qry = "SELECT * FROM gst ORDER BY EffectiveDate DESC";
-			$result = $conn->query($qry);
-			if($result->num_rows >0)
-			{
-				$todaysDate = new DateTime('now');
-				$Date = $todaysDate->format("Y-m-d");
-				$taxratenotdeterminedyet = True;
-				while($taxratenotdeterminedyet == True)
-				{
-					$row = $result->fetch_array();
-					if((strtotime($row["EffectiveDate"]) <= $Date))     //  strtotime     date("Y-m-d")   (new DateTime() > new DateTime($row["EffectiveDate"]))
-					{
-						$taxratenotdeterminedyet = False;
-						$currentTaxRate = $row["TaxRate"];                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                        $currentTaxRate = 8;
-					}
-					
-				}
-				
-			}
-			else {
-				$currentTaxRate = 8;
-			}
-			*/
-
-			
-			//$row = $result->fetch_array(); 
-			//$conn->close();
-			//$currentTaxRate = $row["TaxRate"];
-
-			//$currentTaxRate = 8; //Temporary
-			//$currentTaxRateInRealPercentages = (($currentTaxRate)/100);
-
-
-			//Calculate the total tax rate
-			//$totalTaxes = $subTotal*$currentTaxRateInRealPercentages;
 		}
 		$MainContent .= "</tbody>";
 		$MainContent .= "</table>";
 		$MainContent .= "</div>";
 		
-		// To Do 7 (Practical 5):
-		// Add PayPal Checkout button on the shopping cart page
+		// Add PayPal Checkout button on the shopping cart page    // THIS PART NEED TO CHECK 
 		$MainContent .= "<form method='post' action='checkoutProcess.php'>";
 		//Adding radio buttons for selecting shipping methods
 		$MainContent .= "<br />";
@@ -191,35 +140,47 @@ if (isset($_SESSION["Cart"])) {
 		$MainContent .= "<input type='radio' id='Express' value='Express' name='shippingmethod' />  ($10) Express Shipping - Delivered within 24 hours"; //onclick='changeShippingMethod()'
 		$MainContent .= "<input type='hidden' name='subTotal' value='$subTotal'>";
 		$MainContent .= "<input type='hidden' name='totalTaxes' value='$totalTaxes'>";
+		$MainContent .= "<input type='hidden' name='shippingmethod' value='$deliveryChargers'>"; // Add on  
 		$MainContent .= "<input type='hidden' name='grandTotal' value='$grandTotal'>";
 
-		// To Do 4 (Practical 4): 
+
+		//Drop down list 
+		$MainContent .= "<form action='cartFunctions.php' method='post'>";
+		$MainContent.= "<select name='shippingSelection' onChange='this.form.submit()'>";
+		$products = array("Normal" => "($5) Normal Shipping - Delivered within 2 working days", "Express" => "($10) Express Shipping - Delivered within 24 hours"); //"Peter"=>"35", "Ben"=>"37", "Joe"=>"43"
+		// Iterating through the product array
+		//$MainContent.= "<option value='' selected disabled hidden>Choose here</option>";
+		foreach($products as $key => $value){ 
+			if($key == $_SESSION['ShippingCost']){
+				//$selected = "selected";
+				$MainContent .=  "<option value=$key selected>$value</option>";
+			}else{
+				$MainContent .=  "<option value=$key> $value</option>";
+			}
+		}
+		$MainContent .= "</select>";
+		$MainContent .= "<input type='hidden' name='action' value='shipping' />";
+		$MainContent .= "</form>"; 
+		$MainContent .= "" .$_SESSION['ShippingCost'] ."<br>";
+
+
 		// Display the subtotal at the end of the shopping cart
+
+		//Subtotal 
 		$MainContent .= "<p style='text-align:right; font-size:15px'> Subtotal (" . $totalItems . " items): SGD $" . number_format($subTotal,2);
+
+		//Shipping fee 
 		if($subTotal >= 200){
-			//$MainContent .= "<br><style='text-align:right; font-size:15px'> Shipping Fee: SGD $" . $deliveryChargers;	
 			$MainContent .= "<br><style='text-align:right; font-size:15px'> Shipping Fee: Free";
-		}
-
-		$MainContent .= "<br><style='text-align:right; font-size:15px'>
-						Tax Fee: SGD $" . number_format($totalTaxes,2);	
-		if($subTotal >= 200){
-			$MainContent .= "<br><style='text-align:right; font-size:15px'>Grand Total: SGD $" . number_format($grandTotal,2);	
 		}else{
-			$MainContent .= "<br><style='text-align:right; font-size:15px'>Grand Total: SGD $" . number_format($grandTotal,2);	
-			$MainContent .= "<br><style='text-align:right; font-size:8px'>Grand Total excludes delivery fees";	
+			$MainContent .= "<br><style='text-align:right; font-size:15px'> Shipping Fee: SGD $" . number_format($deliveryChargers,2);	
 		}
 
-						/*
-		$MainContent .= "<br><style='text-align:right; font-size:15px'>
-						CurrentTaxRate: " . number_format($currentTaxRate,2);	
-		$MainContent .= "<br><style='text-align:right; font-size:15px'>
-						CurrentTaxRateInRealPercentages: " . number_format($currentTaxRateInRealPercentages,2);	
-		$MainContent .= "<br><style='text-align:right; font-size:15px'>
-						rowtaxrate: " . number_format($row["TaxRate"],2);	
-		$MainContent .= "<br><style='text-align:right; font-size:15px'>
-						effectivedate: " . $row["EffectiveDate"];	
-						*/
+		//Tax/GST  
+		$MainContent .= "<br><style='text-align:right; font-size:15px'> Tax Fee: SGD $" . number_format($totalTaxes,2);
+
+		//GrandAmount 	
+		$MainContent .= "<br><style='text-align:right; font-size:15px'>Grand Total: SGD $" . number_format($grandTotal,2);	
 		
 		$_SESSION["SubTotal"] = round($subTotal,2);
 
@@ -235,7 +196,24 @@ if (isset($_SESSION["Cart"])) {
 		$MainContent .= "<input type='image' style='float:right;'
 						 src='https://www.paypal.com/en_US/i/btn/btn_xpressCheckout.gif'>";
 		$MainContent .= "</form></p>";
-		
+
+		$MainContent .= "<form action='cartFunctions.php' method='post'>";
+		$MainContent.= "<select name='shippingSelection' onChange='this.form.submit()'>";
+		$products = array("Normal" => "($5) Normal Shipping - Delivered within 2 working days", "Express" => "($10) Express Shipping - Delivered within 24 hours"); //"Peter"=>"35", "Ben"=>"37", "Joe"=>"43"
+		// Iterating through the product array
+		//$MainContent.= "<option value='' selected disabled hidden>Choose here</option>";
+		foreach($products as $key => $value){ 
+			if($key == $_SESSION['ShippingCost']){
+				//$selected = "selected";
+				$MainContent .=  "<option value=$key selected>$value</option>";
+			}else{
+				$MainContent .=  "<option value=$key> $value</option>";
+			}
+		}
+		$MainContent .= "</select>";
+		$MainContent .= "<input type='hidden' name='action' value='shipping' />";
+		$MainContent .= "</form>"; 
+		$MainContent .= "" .$_SESSION['ShippingCost'] ."<br>";
 	}
 	else {
 		$MainContent .= "<h3 style='text-align:center; color:red;'>Empty shopping cart!</h3>";
