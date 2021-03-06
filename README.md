@@ -14,7 +14,7 @@ followed by a responsive navigation bar, featured products and finally the foote
 ![Image of Home Page](https://github.com/victorjongsoon/flowerique/blob/master/Images/Github/Homepage.PNG)
 
 ## 2 - Sign Up Page
-This is the Sing Up page for the website. In order for a user to make purchases at Flowerique, he needs to create an account with Flowerique first. 
+This is the Sign Up page for the website. In order for a user to make purchases at Flowerique, he needs to create an account with Flowerique first. 
 To register an account with Flowerique, the user must provide a name, email address, password, and an answer to the security question. The rest of the fields are optional at the registration process and the user can choose to update them after they sign in.
 <br />
 <br />
