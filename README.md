@@ -29,7 +29,7 @@ in order to place an order. When a user forgets his password, he can click on th
 ![Image of Login Page](https://github.com/victorjongsoon/flowerique/blob/master/Images/Github/Login.PNG)
 
 ## 4 - Forget Password Page
-When a user is not able to login because he forgets his password, he can choose to retrieve his password from the forget password page. To retrieve his password back, the user has to first key in his email address. The email address must be one that is registered in the database. If the email address does not exist in the database, the user cannot proceed to the second phase and will be redirected to an error page.
+This is the forget password page for Flowerique. When a user is not able to login because he forgets his password, he can choose to retrieve his password from the forget password page. To retrieve his password back, the user has to first key in his email address. The email address must be one that is registered in the database. If the email address does not exist in the database, the user cannot proceed to the second phase and will be redirected to an error page.
 
 The second phase requires the user to key in the correct answer to the security question. This security question and answer to the security question is what the user keyed in during the registration process. If the answer to the security question is wrong, the user will be redirected to an error page.
 
@@ -53,8 +53,8 @@ The user can change their name, birthday, address, country, phone number, email 
 <br />
 ![Image of Login Page](https://github.com/victorjongsoon/flowerique/blob/master/Images/Github/UpdateProfile.PNG)
 
-## 6 - Product/Service Feedback
-In the feedback page, everyone can view the feedback posted by registered users. Every feedback includes a subject, ranking, 
+## 6 - Feedback Page
+This is the feedback page for Flowerique. In the feedback page, everyone can view the feedback posted by registered users. Every feedback includes a subject, ranking, 
 comment and user’s name. The feedback page helps new users to have a better understanding of Flowerique before buying 
 items from it. The feedback can only be posted by registered users. This is to ensure that there is no spam feedback which will perceive the new users’ experience. 
 <br />
