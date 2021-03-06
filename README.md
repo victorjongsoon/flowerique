@@ -34,14 +34,14 @@ When a user is not able to login because he forgets his password, he can choose 
 The second phase requires the user to key in the correct answer to the security question. This security question and answer to the security question is what the user keyed in during the registration process. If the answer to the security question is wrong, the user will be redirected to an error page.
 
 
-Step 1
+### Step 1
 
 <img src="https://github.com/victorjongsoon/flowerique/blob/master/Images/Github/Forgetpassword1.PNG" alt="Forget Password Page 1">
 
-Step 2
+### Step 2
 
 <img src="https://github.com/victorjongsoon/flowerique/blob/master/Images/Github/Forgetpassword1.PNG" alt="Forget Password Page 2">
 
-Step 3
+### Step 3
 
 <img src="https://github.com/victorjongsoon/flowerique/blob/master/Images/Github/Forgetpassword1.PNG" alt="Forget Password Page 3">
