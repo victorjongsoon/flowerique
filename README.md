@@ -40,8 +40,8 @@ The second phase requires the user to key in the correct answer to the security 
 
 ### Step 2
 
-<img src="https://github.com/victorjongsoon/flowerique/blob/master/Images/Github/Forgetpassword1.PNG" alt="Forget Password Page 2">
+<img src="https://github.com/victorjongsoon/flowerique/blob/master/Images/Github/Forgetpassword2.PNG" alt="Forget Password Page 2">
 
 ### Step 3
 
-<img src="https://github.com/victorjongsoon/flowerique/blob/master/Images/Github/Forgetpassword1.PNG" alt="Forget Password Page 3">
+<img src="https://github.com/victorjongsoon/flowerique/blob/master/Images/Github/Forgetpassword3.PNG" alt="Forget Password Page 3">
