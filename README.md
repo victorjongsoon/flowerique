@@ -52,3 +52,11 @@ The user can change their name, birthday, address, country, phone number, email 
 <br />
 <br />
 ![Image of Login Page](https://github.com/victorjongsoon/flowerique/blob/master/Images/Github/UpdateProfile.PNG)
+
+## 6 - Product/Service Feedback
+In the feedback page, everyone can view the feedback posted by registered users. Every feedback includes a subject, ranking, 
+comment and user’s name. The feedback page helps new users to have a better understanding of Flowerique before buying 
+items from it. The feedback can only be posted by registered users. This is to ensure that there is no spam feedback which will perceive the new users’ experience. 
+<br />
+<br />
+![Image of Login Page](https://github.com/victorjongsoon/flowerique/blob/master/Images/Github/Feedback.PNG)
