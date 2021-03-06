@@ -63,7 +63,7 @@ items from it. The feedback can only be posted by registered users. This is to e
 
 # What can be improved in this project?
 1. I could use email verification to allow user to retrieve/change their password
-2. I could hashed the password in the database so that it is more secure
+2. I could hash the password in the database so that it is more secure
 
 # Skillset required for  the project
 * HTML, CSS, Javascript
