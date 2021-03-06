@@ -45,3 +45,10 @@ The second phase requires the user to key in the correct answer to the security 
 ### Step 3
 
 <img src="https://github.com/victorjongsoon/flowerique/blob/master/Images/Github/Forgetpassword3.PNG" alt="Forget Password Page 3">
+
+## 5 - Update Profile Page
+The user can view their account information at the update profile page. They can also make changes to their personal particulars. 
+The user can change their name, birthday, address, country, phone number, email address, security question and answer to the security question. 
+<br />
+<br />
+![Image of Login Page](https://github.com/victorjongsoon/flowerique/blob/master/Images/Github/UpdateProfile.PNG)
