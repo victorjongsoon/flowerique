@@ -61,7 +61,7 @@ items from it. The feedback can only be posted by registered users. This is to e
 <br />
 ![Image of Login Page](https://github.com/victorjongsoon/flowerique/blob/master/Images/Github/Feedback.PNG)
 
-# - What can be improved in this project?
+# What can be improved in this project?
 1. I could use email verification to allow user to retrieve/change their password
 2. I could hashed the password in the database so that it is more secure
 
